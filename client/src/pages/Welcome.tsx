@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
-interface Props {}
-
-export const Welcome: React.FC = (props: Props): JSX.Element => {
+export const Welcome: React.FC = (): JSX.Element => {
   const [search, setSearch] = useState<string>("");
 
   const searchForPlaces = (): void => {

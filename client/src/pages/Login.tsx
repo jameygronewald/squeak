@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 
-interface Props {}
-
 interface UserCredentialsState {
   email: string;
   password: string;
 }
 
-export const Login: React.FC = (props: Props): JSX.Element => {
+export const Login: React.FC = (): JSX.Element => {
   const [credentials, setCredentials] = useState<UserCredentialsState>({
     email: "",
     password: "",

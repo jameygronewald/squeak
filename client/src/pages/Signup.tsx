@@ -1,10 +1,6 @@
 import React from 'react'
 
-interface Props {
-    
-}
-
-export const Signup = (props: Props) => {
+export const Signup: React.FC = (): JSX.Element => {
     return (
         <div>
             

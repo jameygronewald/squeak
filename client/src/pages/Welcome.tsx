@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 
 interface SearchParamsObject {
-  search: string
-  city: string
+  search: string;
+  city: string;
 }
 
 export const Welcome: React.FC = (): JSX.Element => {
   const [searchParams, setSearchParams] = useState<SearchParamsObject>({
-    search: '',
-    city: ''
+    search: "",
+    city: "",
   });
 
   const searchForPlaces = async (): Promise<void> => {
@@ -18,13 +18,19 @@ export const Welcome: React.FC = (): JSX.Element => {
       method: "GET",
       headers: {
         Authorization:
-          "Bearer ",
+          'Bearer ' + process.env.REACT_APP_YELP_API_KEY,
         "Content-Type": "application/json",
       },
     };
     const data = await fetch(URL, config);
     const dataJSON = await data.json();
-    console.log(dataJSON);
+    const searchResults = dataJSON.businesses;
+    const searchDisplay = searchResults.map((business: any): {} => {
+      const { id, name, phone, rating } = business;
+      const { address1, city, state, zip_code } = business.location;
+      return { id, name, phone, rating, address1, city, state, zip_code };
+    });
+    console.log(searchDisplay);
   };
 
   return (
@@ -35,7 +41,7 @@ export const Welcome: React.FC = (): JSX.Element => {
         name="search"
         value={searchParams.search}
         onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-          setSearchParams({...searchParams, search: e.target.value})
+          setSearchParams({ ...searchParams, search: e.target.value })
         }
       />
       <input
@@ -43,7 +49,7 @@ export const Welcome: React.FC = (): JSX.Element => {
         name="city"
         value={searchParams.city}
         onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-          setSearchParams({...searchParams, city: e.target.value})
+          setSearchParams({ ...searchParams, city: e.target.value })
         }
       />
       <button type="button" onClick={searchForPlaces}>

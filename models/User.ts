@@ -3,23 +3,24 @@ import { ORM } from "../server/config/ORM";
 export const User = {
   selectUser: async function (user_id: string) {
     try {
-      const result = await ORM.selectOne("user", user_id);
+      const result = await ORM.selectOne("users", user_id);
     } catch (err) {
       console.error(err.message);
     }
   },
 
-  createUser: async function (columns: string, values: string) {
+  createUser: async function (columns: any, values: any) {
     try {
-      const result = await ORM.insertOne("user", columns, values);
+        console.log('model: ', columns, values)
+      const result = await ORM.insertOne("users", columns, values);
     } catch (err) {
-      console.error(err.message);
+      console.error("Model: " + err.message);
     }
   },
 
   deleteUser: async function (user_id: string) {
     try {
-      const result = await ORM.deleteOne("user", user_id);
+      const result = await ORM.deleteOne("users", user_id);
     } catch (err) {
       console.error(err.message);
     }

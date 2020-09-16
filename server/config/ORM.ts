@@ -22,14 +22,18 @@ export const ORM = {
     }
   },
 
-  insertOne: async function (table: string, columns: string, values: String) {
-    const queryString: string = `INSERT INTO $1 ($2)
-      VALUES($3);`;
+  insertOne: async function (table: string, columns: any, values: any) {
+    // const queryString: string = "INSERT INTO $1 ($2) VALUES($3)";
+    const queryString: string = `INSERT INTO ${table} (${columns})
+      VALUES(${values});`;
+      console.log('ORM query: ', queryString);
+      const testString = "INSERT INTO users (email, password) VALUES ('test', '1234')"
     try {
-      const result = await pool.query(queryString, [table, columns, values]);
+      // const result = await pool.query(queryString, [table, columns, values]);
+      const result = await pool.query(testString);
       console.log(result);
     } catch (err) {
-      console.error(err.message);
+      console.error('ORM: ' + err.message);
     }
   },
   

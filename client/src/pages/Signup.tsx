@@ -10,7 +10,6 @@ export const Signup: React.FC = (): JSX.Element => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    console.log(signupInfo);
     signupInfo.password === signupInfo.passwordConfirm
       ? createUser(signupInfo)
       : window.alert("Password and confirmation must match");
@@ -26,8 +25,7 @@ export const Signup: React.FC = (): JSX.Element => {
         },
         body: JSON.stringify(newUserInfo),
       };
-      console.log(signupConfig);
-      const response = await fetch("http://localhost:3001/user", signupConfig);
+      const response = await fetch("http://localhost:3001/signup", signupConfig);
       const JSONdata = await response.json();
       console.log(response);
       console.log(JSONdata);

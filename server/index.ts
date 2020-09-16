@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const cors = require("cors");
+const connection = require("./config/db").pool;
+const authController = require('../controllers/authController');
 
 const PORT = process.env.PORT || 3001;
 
@@ -12,6 +14,8 @@ app.use(cors());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
+
+app.use(authController);
 
 app.get("/api/config", (req, res) => {
   res.json({ success: true });

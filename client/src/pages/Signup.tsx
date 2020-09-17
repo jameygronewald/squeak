@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { SignupInfoState } from "../interfaces";
+import { UserContext } from "../utils/UserContext";
+import { RouteComponentProps } from 'react-router-dom';
 
-export const Signup: React.FC = (): JSX.Element => {
+interface SignupProps extends RouteComponentProps {}
+
+export const Signup: React.FC<SignupProps> = ({ history }): JSX.Element => {
   const [signupInfo, setSignupInfo] = useState<SignupInfoState>({
     email: "",
     password: "",
     passwordConfirm: "",
   });
+
+  const { handleLogin } = useContext(UserContext);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
@@ -25,10 +31,15 @@ export const Signup: React.FC = (): JSX.Element => {
         },
         body: JSON.stringify(newUserInfo),
       };
-      const response = await fetch("http://localhost:3001/signup", signupConfig);
+      const response = await fetch(
+        "http://localhost:3001/signup",
+        signupConfig
+      );
       const JSONdata = await response.json();
-      console.log(response);
-      console.log(JSONdata);
+      if (handleLogin) {
+        handleLogin(JSONdata.body.sessionToken);
+        history.push("/welcome");
+      }
     } catch (err) {
       console.error(err.message);
     }

@@ -1,5 +1,6 @@
 import * as express from "express";
 import { User } from "../models/User";
+import { tokenHelper } from "../client/src/utils/tokenHelper";
 
 const router = express.Router();
 
@@ -13,11 +14,12 @@ router.post("/signup", async (req, res) => {
       values.push(newUserInfo[key]);
     }
     const slicedValues = values.slice(0, -1);
-    const newUser = await User.createUser(columns, slicedValues);
-    console.log(newUser);
+    await User.createUser(columns, slicedValues);
+    const token = await tokenHelper.generateToken(newUserInfo.email);
+    console.log(token);
     res.status(201).json({
       error: false,
-      body: newUser,
+      body: token,
       message: "Successfully created new user.",
     });
   } catch (err) {

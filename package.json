@@ -24,12 +24,15 @@
   },
   "homepage": "https://github.com/jameygronewald/squeak#readme",
   "dependencies": {
+    "@types/cors": "^2.8.7",
     "@types/express": "^4.17.8",
+    "@types/jsonwebtoken": "^8.5.0",
     "@types/node": "^14.10.1",
     "concurrently": "^5.3.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "if-env": "^1.0.4",
+    "jsonwebtoken": "^8.5.1",
     "pg": "^8.3.3"
   }
 }

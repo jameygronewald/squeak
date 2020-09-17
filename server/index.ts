@@ -1,10 +1,10 @@
-const express = require("express");
-const app = express();
-const path = require("path");
-const cors = require("cors");
-const connection = require("./config/db").pool;
+import * as express from "express";
+import * as path from "path";
+import * as cors from "cors";
 const authController = require('../controllers/authController');
 const placeController = require('../controllers/placeController');
+
+const app = express();
 
 const PORT = process.env.PORT || 3001;
 

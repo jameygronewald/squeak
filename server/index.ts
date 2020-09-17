@@ -4,6 +4,7 @@ const path = require("path");
 const cors = require("cors");
 const connection = require("./config/db").pool;
 const authController = require('../controllers/authController');
+const placeController = require('../controllers/placeController');
 
 const PORT = process.env.PORT || 3001;
 
@@ -16,6 +17,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.use(authController);
+app.use(placeController);
 
 app.get("/api/config", (req, res) => {
   res.json({ success: true });

@@ -19,6 +19,6 @@ CREATE TABLE place(
     state VARCHAR(25) NOT NULL,
     zip_code VARCHAR(25) NOT NULL,
     notes text,
-    rating INT
-    FOREIGN KEY user_id VARCHAR (255) NOT NULL REFERENCES user(user_id),
+    user_rating INT
 );
+    -- FOREIGN KEY user_id VARCHAR (255) NOT NULL REFERENCES user(user_id),

@@ -39,10 +39,25 @@ export const Welcome: React.FC = (): JSX.Element => {
 
   const savePlace = async (place: SearchData): Promise<void> => {
     console.log("saving...", place);
-    // const response = await fetch('./savedPlaces', {
-    //   method: "POST",
-    //   body: JSON.stringify(place)
-    // });
+    try {
+      const savePlaceConfig = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(place),
+      };
+      const response = await fetch(
+        "http://localhost:3001/places",
+        savePlaceConfig
+      );
+      // const responseData = response.json();
+      console.log(response);
+      // console.log(responseData);
+    } catch (err) {
+      console.error(err.message);
+    }
   };
 
   return (

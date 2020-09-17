@@ -11,7 +11,6 @@ export const User = {
 
   createUser: async function (columns: any, values: any) {
     try {
-        console.log('model: ', columns, values)
       const result = await ORM.insertOne("users", columns, values);
     } catch (err) {
       console.error("Model: " + err.message);

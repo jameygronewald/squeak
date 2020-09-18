@@ -7,13 +7,11 @@ router.post("/places", async (req, res) => {
   try {
     const newPlaceData = await req.body;
     const columns = Object.keys(newPlaceData);
-    console.log(columns);
     let values = [];
     for (let key in newPlaceData) {
       values.push(newPlaceData[key]);
     }
-    console.log(values);
-    const newPlace = await Place.savePlace(columns, values);
+    const newPlace = await Place.savePlace(columns, values);   
     console.log(newPlace);
     res.status(201).json({
       error: false,

@@ -24,10 +24,10 @@ export const ORM = {
   insertOne: async function (table: string, columns: any, values: any) {
     let placeholderString = '';
     columns.forEach((column, index) => index === columns.length - 1 ? placeholderString += `$${index + 1}` : placeholderString += `$${index + 1}, `);
-    const queryString: string = `INSERT INTO ${table}(${columns}) VALUES(${placeholderString});`;
-    console.log("ORM query: ", queryString);
+    const queryString: string = `INSERT INTO ${table}(${columns}) VALUES(${placeholderString}) RETURNING *;`;
     try {
       const result = await pool.query(queryString, [...values]);
+      return result.rows[0];
     } catch (err) {
       console.error("ORM: " + err.message);
     }

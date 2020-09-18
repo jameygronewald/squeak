@@ -38,7 +38,6 @@ export const Welcome: React.FC = (): JSX.Element => {
   };
 
   const savePlace = async (place: SearchData): Promise<void> => {
-    console.log("saving...", place);
     try {
       const savePlaceConfig = {
         method: "POST",
@@ -52,9 +51,8 @@ export const Welcome: React.FC = (): JSX.Element => {
         "http://localhost:3001/places",
         savePlaceConfig
       );
-      // const responseData = response.json();
-      console.log(response);
-      // console.log(responseData);
+      const responseData = await response.json();
+      console.log(responseData);
     } catch (err) {
       console.error(err.message);
     }

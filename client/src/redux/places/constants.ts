@@ -1,0 +1,1 @@
+export const SAVE_PLACE = 'SAVE_PLACE';

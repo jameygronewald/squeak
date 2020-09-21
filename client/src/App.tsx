@@ -26,7 +26,6 @@ const App = () => {
 
   const checkAuthStatus = () => {
     const token = localStorage.getItem("sessionToken");
-    console.log(token);
     if (token) handleLogin(token);
   }
 

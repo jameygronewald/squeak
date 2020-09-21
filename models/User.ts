@@ -1,11 +1,12 @@
 import { ORM } from "../server/config/ORM";
 
 export const User = {
-  selectUser: async function (user_id: string) {
+  selectUser: async function (email: string) {
     try {
-      const result = await ORM.selectOne("users", user_id);
+      const result = await ORM.selectOne("users", "email", email);
+      return result;
     } catch (err) {
-      console.error(err.message);
+      console.error("Models: " + err.message);
     }
   },
 

@@ -4,6 +4,11 @@ export interface SignupInfoState {
   passwordConfirm: string;
 }
 
+export interface UserCredentialsState {
+  email: string;
+  password: string;
+}
+
 export interface SearchParams {
   search: string;
   city: string;

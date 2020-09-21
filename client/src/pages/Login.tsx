@@ -42,6 +42,7 @@ export const Login: React.FC<LoginProps> = ({ history }): JSX.Element => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        <label htmlFor="email">Email: </label>
         <input
           type="text"
           name="email"
@@ -50,6 +51,7 @@ export const Login: React.FC<LoginProps> = ({ history }): JSX.Element => {
             setCredentials({ ...credentials, email: e.target.value })
           }
         />
+        <label htmlFor="password"> Password: </label>
         <input
           type="text"
           name="password"

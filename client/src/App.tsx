@@ -1,7 +1,12 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route as PublicRoute } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route as PublicRoute,
+} from "react-router-dom";
 import { UserContext } from "./utils/UserContext";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Navbar from "./components/Navbar";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import { Signup } from "./pages/Signup";
@@ -30,6 +35,7 @@ function App() {
             setAuthStatus,
           }}
         >
+          <Navbar />
           <Switch>
             <PublicRoute exact path="/" component={Home} />
             <PublicRoute exact path="/login" component={Login} />

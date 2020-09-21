@@ -1,3 +1,32 @@
 body {
-    margin: 20px;
+  margin: 0;
+  padding: 0;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  background: #133b5c;
+  color: #fddb3a;
+}
+
+button {
+  font-weight: bolder;
+  color: #f4f4f4;
+  padding: 5px 15px;
+  margin: 5px;
+  border: #fddb3a solid 2.5px;
+  border-radius: 50%;
+  background: #1e5f74;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.logoutButton {
+    font-size: 1.5rem;
+    border-radius: 0 0 0 12%;
+    background: #fddb3a;
+    color: #1e5f74;
+    margin: 0;
 }

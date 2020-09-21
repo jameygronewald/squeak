@@ -15,9 +15,10 @@ router.post("/places", async (req, res) => {
     const newPlaceData = await req.body;
     const unparsedUserId = newPlaceData.user_id;
     const parsedUserId = tokenHelper.verifyToken(unparsedUserId);
-    let parsedUserIdObject: {data: number};
-    if (typeof parsedUserId == 'object'){
-        parsedUserIdObject = parsedUserId as { data: number };
+    if (!parsedUserId) throw new Error();
+    let parsedUserIdObject: { data: number };
+    if (typeof parsedUserId == "object") {
+      parsedUserIdObject = parsedUserId as { data: number };
     }
     newPlaceData.user_id = parsedUserIdObject.data;
     const columns = Object.keys(newPlaceData);
@@ -27,7 +28,7 @@ router.post("/places", async (req, res) => {
     }
     const newPlace = await Place.savePlace(columns, values);
     console.log(newPlace);
-    if (!newPlace) throw new Error;
+    if (!newPlace) throw new Error();
     res.status(201).json({
       error: false,
       body: newPlace,

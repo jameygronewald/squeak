@@ -27,7 +27,6 @@ router.post("/places", async (req, res) => {
       values.push(newPlaceData[key]);
     }
     const newPlace = await Place.savePlace(columns, values);
-    console.log(newPlace);
     if (!newPlace) throw new Error();
     res.status(201).json({
       error: false,

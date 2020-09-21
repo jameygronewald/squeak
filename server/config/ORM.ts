@@ -11,13 +11,13 @@ export const ORM = {
     }
   },
 
-  selectOne: async function (table: string, id: string) {
-    const queryString: string = "SELECT * FROM $1 WHERE id = $2;";
+  selectOne: async function (table: string, column: string, value: string) {
+    const queryString: string = `SELECT * FROM ${table} WHERE ${column} = $1;`;
     try {
-      const result = await pool.query(queryString, [table, id]);
-      return result;
+      const result = await pool.query(queryString, [value]);
+      return result.rows[0];
     } catch (err) {
-      console.error(err.message);
+      console.error('ORM: ' + err.message);
     }
   },
 

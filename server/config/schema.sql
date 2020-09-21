@@ -1,5 +1,9 @@
 CREATE DATABASE squeak;
 
+DROP TABLE IF EXISTS place;
+
+DROP TABLE IF EXISTS users;
+
 CREATE TABLE users (
     user_id SERIAL NOT NULL PRIMARY KEY,
     email VARCHAR (100) NOT NULL,
@@ -14,7 +18,7 @@ CREATE TABLE place(
     yelp_id VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
     phone VARCHAR(25) NOT NULL,
-    rating INT NOT NULL,
+    rating FLOAT NOT NULL,
     address1 VARCHAR(255) NOT NULL,
     city VARCHAR(100) NOT NULL,
     state VARCHAR(25) NOT NULL,
@@ -27,4 +31,3 @@ CREATE TABLE place(
     REFERENCES users(user_id)
     ON DELETE CASCADE
 );
-    -- FOREIGN KEY user_id VARCHAR (255) NOT NULL REFERENCES user(user_id),

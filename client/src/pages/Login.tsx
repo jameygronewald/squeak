@@ -1,11 +1,8 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "../utils/UserContext";
 import { UserCredentialsState } from "../interfaces";
-import { RouteComponentProps } from 'react-router-dom';
 
-interface LoginProps extends RouteComponentProps {}
-
-export const Login: React.FC<LoginProps> = ({ history }): JSX.Element => {
+export const Login: React.FC = (): JSX.Element => {
   const [credentials, setCredentials] = useState<UserCredentialsState>({
     email: "",
     password: "",
@@ -32,7 +29,6 @@ export const Login: React.FC<LoginProps> = ({ history }): JSX.Element => {
       const JSONdata = await response.json();
       if (handleLogin) {
         handleLogin(JSONdata.body.sessionToken);
-        history.push("/welcome");
       }
     } catch (err) {
       console.error(err.message);

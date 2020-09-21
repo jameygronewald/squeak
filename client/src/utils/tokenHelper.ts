@@ -9,16 +9,22 @@ export const tokenHelper = {
   },
 
   signjwt: function (id: string) {
-    return jwt.sign(
-      {
-        data: id,
-      },
-      "tokenSecret",
-      { expiresIn: "7d" }
-    );
+    const tokenSecret = process.env.SECRET;
+    if (tokenSecret) {
+      return jwt.sign(
+        {
+          data: id,
+        },
+        tokenSecret,
+        { expiresIn: "7d" }
+      );
+    }
   },
 
   verifyToken: function (tokenValue: string) {
-    return jwt.verify(tokenValue, "tokenSecret");
+    const tokenSecret = process.env.SECRET;
+    if (tokenSecret) {
+      return jwt.verify(tokenValue, tokenSecret);
+    }
   },
 };

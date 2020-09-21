@@ -10,7 +10,8 @@ CREATE TABLE users (
 
 CREATE TABLE place(
     place_id SERIAL PRIMARY KEY,
-    id VARCHAR(255) NOT NULL,
+    user_id INT NOT NULL,
+    yelp_id VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
     phone VARCHAR(25) NOT NULL,
     rating INT NOT NULL,
@@ -19,6 +20,11 @@ CREATE TABLE place(
     state VARCHAR(25) NOT NULL,
     zip_code VARCHAR(25) NOT NULL,
     notes text,
-    user_rating INT
+    user_rating INT,
+    favorite BOOLEAN,
+    CONSTRAINT fk_users
+    FOREIGN KEY (user_id)
+    REFERENCES users(user_id)
+    ON DELETE CASCADE
 );
     -- FOREIGN KEY user_id VARCHAR (255) NOT NULL REFERENCES user(user_id),

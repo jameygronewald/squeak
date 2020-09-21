@@ -14,9 +14,9 @@ router.post("/signup", async (req, res) => {
       values.push(newUserInfo[key]);
     }
     const slicedValues = values.slice(0, -1);
-    await User.createUser(columns, slicedValues);
-    const token = await tokenHelper.generateToken(newUserInfo.email);
-    console.log(token);
+    const newUserData = await User.createUser(columns, slicedValues);
+    const token = tokenHelper.generateToken(newUserData.user_id);
+    if (!newUserData) throw new Error;
     res.status(201).json({
       error: false,
       body: token,

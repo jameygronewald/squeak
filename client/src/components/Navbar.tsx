@@ -7,10 +7,11 @@ import { RouteComponentProps, withRouter } from "react-router-dom";
 interface LogoutProps extends RouteComponentProps {}
 
 const Navbar: React.FC<LogoutProps> = ({ history }): JSX.Element => {
-  const { authStatus, setAuthStatus } = useContext(UserContext);
+  const { authStatus, setAuthStatus, setSessionToken } = useContext(UserContext);
 
   const logoutUser = (): void => {
     localStorage.clear();
+    if (setSessionToken) setSessionToken('');
     if (setAuthStatus) setAuthStatus({ isAuthenticated: false });
     history.push("/");
   };
@@ -21,7 +22,7 @@ const Navbar: React.FC<LogoutProps> = ({ history }): JSX.Element => {
         text={authStatus?.isAuthenticated ? "Squeak" : "Welcome to Squeak"}
         className="navHeader"
       />
-      <Button className="logoutButton" text="Log Out" onClick={logoutUser} />
+      {authStatus?.isAuthenticated && <Button className="logoutButton" text="Log Out" onClick={logoutUser} />}
     </div>
   );
 };

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { UserContext } from "../utils/UserContext";
 import {
   SearchParams,
   SearchConfig,
@@ -13,6 +14,8 @@ export const Welcome: React.FC = (): JSX.Element => {
   });
 
   const [searchedPlaces, setSearchPlaces] = useState<SearchData[]>([]);
+
+  const { sessionToken } = useContext(UserContext);
 
   const searchForPlaces = async (): Promise<void> => {
     const { search, city } = searchParams;
@@ -31,7 +34,9 @@ export const Welcome: React.FC = (): JSX.Element => {
       (business: SearchResults) => {
         const { id, name, phone, rating } = business;
         const { address1, city, state, zip_code } = business.location;
-        return { id, name, phone, rating, address1, city, state, zip_code };
+        const yelp_id = id;
+        const user_id = sessionToken;
+        return { yelp_id, user_id, name, phone, rating, address1, city, state, zip_code };
       }
     );
     setSearchPlaces(searchDisplayData);
@@ -83,7 +88,7 @@ export const Welcome: React.FC = (): JSX.Element => {
         Search
       </button>
       {searchedPlaces.map((place: SearchData) => (
-        <ul key={place.id}>
+        <ul key={place.yelp_id}>
           <h3>{place.name}</h3>
           <li>
             {place.address1} / {place.city}, {place.state}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route as PublicRoute } from "react-router-dom";
 import { UserContext } from "./utils/UserContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { Home } from "./pages/Home";
@@ -31,9 +31,9 @@ function App() {
           }}
         >
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={Signup} />
+            <PublicRoute exact path="/" component={Home} />
+            <PublicRoute exact path="/login" component={Login} />
+            <PublicRoute exact path="/signup" component={Signup} />
             <ProtectedRoute exact path="/welcome" component={Welcome} />
           </Switch>
         </UserContext.Provider>

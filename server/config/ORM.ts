@@ -11,6 +11,16 @@ export const ORM = {
     }
   },
 
+  selectAllWhere: async function (table: string, id: number) {
+    const queryString: string = `SELECT * FROM ${table} WHERE user_id = $1;`;
+    try {
+      const result = await pool.query(queryString, [id]);
+      return result.rows;
+    } catch (err) {
+      console.error('ORM: ' + err.message);
+    }
+  },
+
   selectOne: async function (table: string, column: string, value: string) {
     const queryString: string = `SELECT * FROM ${table} WHERE ${column} = $1;`;
     try {

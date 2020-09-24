@@ -26,7 +26,7 @@ const App = () => {
 
   const checkAuthStatus = () => {
     const token = localStorage.getItem("sessionToken");
-    if (token && token != "undefined") handleLogin(token);
+    if (token && token !== "undefined") handleLogin(token);
   }
 
   useEffect(() => {

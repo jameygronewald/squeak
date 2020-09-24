@@ -36,7 +36,7 @@ export const Login: React.FC = (): JSX.Element => {
   };
 
   return (
-    <div>
+    <div className="loginContainer">
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email: </label>
         <input

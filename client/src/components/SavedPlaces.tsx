@@ -2,9 +2,8 @@ import React, { useEffect, useContext } from "react";
 import store from "../redux/store";
 import { useSelector } from "react-redux";
 import { UserContext } from "../utils/UserContext";
-import { stat } from "fs";
 
-export const SavedPlaces = (props: any) => {
+export const SavedPlaces = () => {
   const { sessionToken } = useContext(UserContext);
 
   const places = useSelector((state: any) => state.places.savedPlaces)
@@ -21,15 +20,14 @@ export const SavedPlaces = (props: any) => {
       type: "GET_SAVED_PLACES",
       payload: responseData.body,
     });
-    console.log(store.getState());
   };
 
   return <div className="savedPlaceContainer">
     <ul>
       {places.map((place: any) => (
-        <li>
+        <h3 key={place.place_id}>
           {place.name}
-        </li>
+        </h3>
       ))}
     </ul>
   </div>;

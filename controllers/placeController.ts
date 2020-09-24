@@ -10,6 +10,34 @@ interface ParsedIdObject {
   exp: number;
 }
 
+router.get("/places/:userId", async (req, res) => {
+  try {
+    const unparsedUserId: string = req.params.userId;
+    const parsedUserId = tokenHelper.verifyToken(unparsedUserId);
+    if (!parsedUserId) throw new Error();
+    let parsedUserIdObject: { data: number };
+    if (typeof parsedUserId == "object") {
+      parsedUserIdObject = parsedUserId as { data: number };
+    }
+    const parsedId = parsedUserIdObject.data;
+    const savedPlaces = await Place.getSavedPlaces(parsedId);
+    console.log(savedPlaces);
+    if (!savedPlaces) throw new Error();
+    res.status(201).json({
+      error: false,
+      body: savedPlaces,
+      message: "Successfully retrieved user's saved places.",
+    });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({
+      error: true,
+      body: null,
+      message: "Unable to retrieve user's places.",
+    });
+  }
+});
+
 router.post("/places", async (req, res) => {
   try {
     const newPlaceData = await req.body;

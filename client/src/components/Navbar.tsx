@@ -18,6 +18,7 @@ const Navbar: React.FC<LogoutProps> = ({ history }): JSX.Element => {
 
   return (
     <div className="navbar">
+      <div className="navSpacer"></div>
       <Header
         text={authStatus?.isAuthenticated ? "Squeak" : "Welcome to Squeak"}
         className="navHeader"

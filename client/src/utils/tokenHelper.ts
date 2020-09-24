@@ -10,21 +10,21 @@ export const tokenHelper = {
 
   signjwt: function (id: string) {
     const tokenSecret = process.env.SECRET;
-    if (tokenSecret) {
+    // if (tokenSecret !== undefined) {
       return jwt.sign(
         {
           data: id,
         },
-        tokenSecret,
+        'tokenSecret',
         { expiresIn: "7d" }
       );
-    }
+    // }
   },
 
   verifyToken: function (tokenValue: string) {
     const tokenSecret = process.env.SECRET;
-    if (tokenSecret) {
-      return jwt.verify(tokenValue, tokenSecret);
-    }
+    // if (tokenSecret !== undefined) {
+      return jwt.verify(tokenValue, 'tokenSecret');
+    // }
   },
 };

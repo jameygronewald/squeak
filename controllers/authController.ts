@@ -42,7 +42,7 @@ router.post("/login", async (req, res) => {
     if (credentials.password === userData.password) {
       token = tokenHelper.generateToken(userData.user_id);
     }
-    if (!token) throw new Error();
+    if (!token || token === {sessionToken: undefined}) throw new Error();
     res.status(201).json({
       error: false,
       body: token,

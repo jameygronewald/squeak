@@ -1,4 +1,4 @@
-import { SAVE_PLACE } from "./constants";
+import { SAVE_PLACE, GET_SAVED_PLACES } from "./constants";
 import { SavedPlaceObject } from "../../global";
 
 interface SavedPlacesState {
@@ -11,11 +11,12 @@ const initialState: SavedPlacesState = {
 
 export default function placesReducer(state: SavedPlacesState = initialState, action: any) {
     switch(action.type) {
+        case GET_SAVED_PLACES: {
+            return { ...state }
+        }
         case SAVE_PLACE: {
             const arrayToReturn = [...state.savedPlaces];
-            console.log(arrayToReturn);
             arrayToReturn.push(action.payload);
-            console.log(action.payload);
             return { ...state, savedPlaces: arrayToReturn }
         }
         default:

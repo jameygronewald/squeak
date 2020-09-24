@@ -42,7 +42,7 @@ export const Signup: React.FC = (): JSX.Element => {
   };
 
   return (
-    <div>
+    <div className="signupContainer">
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email: </label>
         <input

@@ -10,6 +10,19 @@ interface ParsedIdObject {
   exp: number;
 }
 
+router.get('/places', async (req, res) => {
+    try {
+        console.log('route hit')
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).json({
+        error: true,
+        body: null,
+        message: "Unable to retrieve user's places.",
+      });
+    }
+})
+
 router.post("/places", async (req, res) => {
   try {
     const newPlaceData = await req.body;

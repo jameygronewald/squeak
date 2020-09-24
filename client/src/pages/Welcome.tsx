@@ -1,11 +1,13 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "../utils/UserContext";
+import store from "../redux/store";
 import {
   SearchParams,
   SearchConfig,
   SearchResults,
   SearchData,
 } from "../interfaces";
+import { SavedPlaces } from "./SavedPlaces"
 
 export const Welcome: React.FC = (): JSX.Element => {
   const [searchParams, setSearchParams] = useState<SearchParams>({
@@ -52,7 +54,7 @@ export const Welcome: React.FC = (): JSX.Element => {
     setSearchPlaces(searchDisplayData);
   };
 
-  const savePlace = async (place: SearchData): Promise<void> => {
+  const savePlace = async (place: SearchData): Promise<any> => {
     try {
       const savePlaceConfig = {
         method: "POST",
@@ -67,7 +69,11 @@ export const Welcome: React.FC = (): JSX.Element => {
         savePlaceConfig
       );
       const responseData = await response.json();
-      console.log(responseData);
+      if (responseData.error) throw new Error();
+      return store.dispatch({
+        type: "SAVE_PLACE",
+        payload: responseData.body,
+      });
     } catch (err) {
       console.error(err.message);
     }
@@ -117,6 +123,7 @@ export const Welcome: React.FC = (): JSX.Element => {
           </ul>
         ))}
       </div>
+      <SavedPlaces/>
     </div>
   );
 };

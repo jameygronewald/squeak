@@ -12,7 +12,6 @@ const initialState: SavedPlacesState = {
 export default function placesReducer(state: SavedPlacesState = initialState, action: any) {
     switch(action.type) {
         case GET_SAVED_PLACES: {
-            console.log(action.payload)
             return { ...state, savedPlaces: action.payload }
         }
         case SAVE_PLACE: {

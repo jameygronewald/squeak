@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import store from "../redux/store";
 import { UserContext } from "../utils/UserContext";
 
@@ -20,5 +20,5 @@ export const SavedPlaces = () => {
     });
   };
 
-  return <div>This is the saved places display.</div>;
+  return <div className="savedPlaceContainer"></div>;
 };

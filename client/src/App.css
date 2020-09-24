@@ -21,7 +21,6 @@ button {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-left: 10vw;
 }
 
 .logoutButton {
@@ -34,11 +33,17 @@ button {
 
 .welcomeContainer {
   display: grid;
-  grid-template-columns: 5vw repeat(5, 18vw) 5vw;
+  grid-template: 5vh 95vh / 5vw repeat(5, 18vw) 5vw;
+}
+
+.getStartedContainer {
+    grid-column: 2 / 7;
+    grid-row: 2;
+    display: flex;
+    align-items: flex-start;
 }
 
 .getStarted {
-    grid-column: 3 / 6;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -48,4 +53,10 @@ button {
 .getStarted label,
 .getStarted input {
     margin: 5px;
+}
+
+.savedPlaceContainer {
+    grid-row: 2;
+    grid-column: 3 / 7;
+    margin-left: 7vw;
 }

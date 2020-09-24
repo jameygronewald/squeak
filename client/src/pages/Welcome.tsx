@@ -7,7 +7,7 @@ import {
   SearchResults,
   SearchData,
 } from "../interfaces";
-import { SavedPlaces } from "./SavedPlaces"
+import { SavedPlaces } from "../components/SavedPlaces";
 
 export const Welcome: React.FC = (): JSX.Element => {
   const [searchParams, setSearchParams] = useState<SearchParams>({
@@ -81,49 +81,51 @@ export const Welcome: React.FC = (): JSX.Element => {
 
   return (
     <div className="welcomeContainer">
-      <div className="getStarted">
-        <h3>Get Started</h3>
-        <label htmlFor="search">Search by business name: </label>
-        <input
-          type="text"
-          name="search"
-          value={searchParams.search}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-            setSearchParams({ ...searchParams, search: e.target.value })
-          }
-        />
-        <label htmlFor="city"> And city: </label>
-        <input
-          type="text"
-          name="city"
-          value={searchParams.city}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-            setSearchParams({ ...searchParams, city: e.target.value })
-          }
-        />
-        <button type="button" onClick={searchForPlaces}>
-          Search
-        </button>
-        {searchedPlaces.map((place: SearchData) => (
-          <ul key={place.yelp_id}>
-            <h3>{place.name}</h3>
-            <li>
-              {place.address1} / {place.city}, {place.state}
-            </li>
-            <li>{place.phone}</li>
-            <li>{place.rating}</li>
-            <button
-              type="button"
-              onClick={(): void => {
-                savePlace(place);
-              }}
-            >
-              Save this place
-            </button>
-          </ul>
-        ))}
+      <div className="getStartedContainer">
+        <div className="getStarted">
+          <h3>Get Started</h3>
+          <label htmlFor="search">Search by business name: </label>
+          <input
+            type="text"
+            name="search"
+            value={searchParams.search}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
+              setSearchParams({ ...searchParams, search: e.target.value })
+            }
+          />
+          <label htmlFor="city"> And city: </label>
+          <input
+            type="text"
+            name="city"
+            value={searchParams.city}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
+              setSearchParams({ ...searchParams, city: e.target.value })
+            }
+          />
+          <button type="button" onClick={searchForPlaces}>
+            Search
+          </button>
+          {searchedPlaces.map((place: SearchData) => (
+            <ul key={place.yelp_id}>
+              <h3>{place.name}</h3>
+              <li>
+                {place.address1} / {place.city}, {place.state}
+              </li>
+              <li>{place.phone}</li>
+              <li>{place.rating}</li>
+              <button
+                type="button"
+                onClick={(): void => {
+                  savePlace(place);
+                }}
+              >
+                Save this place
+              </button>
+            </ul>
+          ))}
+        </div>
       </div>
-      <SavedPlaces/>
+      <SavedPlaces />
     </div>
   );
 };

@@ -7,7 +7,7 @@ interface HomeTextProps {
     className: string
 }
 
-export const HomeText: React.FC<HomeTextProps> = (props: HomeTextProps): JSX.Element => {
+const HomeText: React.FC<HomeTextProps> = (props: HomeTextProps): JSX.Element => {
     return (
         <div className={props.className}>
             <h3>{props.text1}</h3>
@@ -16,3 +16,5 @@ export const HomeText: React.FC<HomeTextProps> = (props: HomeTextProps): JSX.Ele
         </div>
     )
 }
+
+export default HomeText;

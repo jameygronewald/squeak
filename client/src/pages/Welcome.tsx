@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { UserContext } from "../utils/UserContext";
+import UserContext from "../utils/UserContext";
 import store from "../redux/store";
 import {
   SearchParams,
@@ -7,9 +7,9 @@ import {
   SearchResults,
   SearchData,
 } from "../interfaces";
-import { SavedPlaces } from "../components/SavedPlaces";
+import SavedPlaces from "../components/SavedPlaces";
 
-export const Welcome: React.FC = (): JSX.Element => {
+const Welcome: React.FC = (): JSX.Element => {
   const [searchParams, setSearchParams] = useState<SearchParams>({
     search: "",
     city: "",
@@ -133,3 +133,5 @@ export const Welcome: React.FC = (): JSX.Element => {
     </div>
   );
 };
+
+export default Welcome;

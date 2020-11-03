@@ -1,9 +1,9 @@
 import React, { useEffect, useContext } from "react";
 import store from "../redux/store";
 import { useSelector } from "react-redux";
-import { UserContext } from "../utils/UserContext";
+import UserContext from "../utils/UserContext";
 
-export const SavedPlaces: React.FC = (): JSX.Element => {
+const SavedPlaces: React.FC = (): JSX.Element => {
   const { sessionToken } = useContext(UserContext);
 
   const places = useSelector((state: any) => state.places.savedPlaces)
@@ -32,3 +32,5 @@ export const SavedPlaces: React.FC = (): JSX.Element => {
     </ul>
   </div>;
 };
+
+export default SavedPlaces;

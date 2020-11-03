@@ -5,10 +5,12 @@ interface HeaderProps {
     className: string
 }
 
-export const Header: React.FC<HeaderProps> = (props: HeaderProps): JSX.Element => {
+const Header: React.FC<HeaderProps> = (props: HeaderProps): JSX.Element => {
     return (
         <h1 className={props.className}>
             {props.text}
         </h1>
     )
 }
+
+export default Header;

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Redirect } from "react-router-dom";
-import { UserContext } from "../../utils/UserContext";
+import UserContext from "../../utils/UserContext";
 
 interface ProtectedRouteProps {
   exact?: boolean;

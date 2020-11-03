@@ -1,6 +1,6 @@
 import * as jwt from "jsonwebtoken";
 
-export const tokenHelper = {
+const tokenHelper = {
   generateToken: function (id: string) {
     const token = {
       sessionToken: this.signjwt(id),
@@ -28,3 +28,5 @@ export const tokenHelper = {
     // }
   },
 };
+
+export default tokenHelper;

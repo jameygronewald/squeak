@@ -4,16 +4,16 @@ import {
   Route,
   Switch
 } from "react-router-dom";
-import { UserContext } from "./utils/UserContext";
+import UserContext from "./utils/UserContext";
 import PublicRoute from "./components/ReactRoutes/PublicRoute";
 import ProtectedRoute from "./components/ReactRoutes/ProtectedRoute";
 import Navbar from "./components/Navbar";
-import { Home } from "./pages/Home";
-import { Login } from "./pages/Login";
-import { Signup } from "./pages/Signup";
-import { Welcome } from "./pages/Welcome";
-import { Search } from "./pages/Search";
-import { NoMatch } from "./pages/NoMatch";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Welcome from "./pages/Welcome";
+import Search from "./pages/Search";
+import NoMatch from "./pages/NoMatch";
 import "./App.css";
 
 const App = () => {

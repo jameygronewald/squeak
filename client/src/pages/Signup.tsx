@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { SignupInfoState } from "../interfaces";
-import { UserContext } from "../utils/UserContext";
+import UserContext from "../utils/UserContext";
 
-export const Signup: React.FC = (): JSX.Element => {
+const Signup: React.FC = (): JSX.Element => {
   const [signupInfo, setSignupInfo] = useState<SignupInfoState>({
     email: "",
     password: "",
@@ -76,3 +76,5 @@ export const Signup: React.FC = (): JSX.Element => {
     </div>
   );
 };
+
+export default Signup;

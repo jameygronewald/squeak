@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
-import { UserContext } from "../utils/UserContext";
+import UserContext from "../utils/UserContext";
 import { UserCredentialsState } from "../interfaces";
 
-export const Login: React.FC = (): JSX.Element => {
+const Login: React.FC = (): JSX.Element => {
   const [credentials, setCredentials] = useState<UserCredentialsState>({
     email: "",
     password: "",
@@ -61,3 +61,5 @@ export const Login: React.FC = (): JSX.Element => {
     </div>
   );
 };
+
+export default Login;

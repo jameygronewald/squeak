@@ -1,5 +1,5 @@
 html {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 body {
@@ -12,14 +12,14 @@ body {
 }
 
 h1 {
-    font-size: 2.5rem;
+  font-size: 2.5rem;
 }
 
 button {
-    font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: bolder;
   color: #f4f4f4;
-  padding: 5px 15px;
+  padding:10px 20px;
   margin: 5px;
   border: #fddb3a solid 2.5px;
   border-radius: 50%;
@@ -38,12 +38,16 @@ button {
   justify-content: center;
 }
 
+.navSpacer {
+    width: 10vw;
+}
+
 .hide {
   display: none;
 }
 
 .logoutButton {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   border-radius: 0 0 0 12%;
   background: #fddb3a;
   color: #1e5f74;
@@ -51,67 +55,67 @@ button {
 }
 
 .homeContainer {
-    display: grid;
-    grid-template: 5vh 20vh 20vh / 5vw 30vw 30vw 30vw 5vw;
+  display: grid;
+  grid-template: 5vh 20vh 20vh / 5vw 30vw 30vw 30vw 5vw;
 }
 
 .homeContainer .signupButton {
-    grid-row: 2;
-    grid-column: 2;
-    justify-self: center;
-    align-self: center;
-    font-size: rem;
+  grid-row: 2;
+  grid-column: 2;
+  justify-self: center;
+  align-self: center;
+  font-size: rem;
 }
 
 .or {
-    grid-row: 2 / 4;
-    grid-column: 2;
-    justify-self: center;
-    align-self: center;
+  grid-row: 2 / 4;
+  grid-column: 2;
+  justify-self: center;
+  align-self: center;
 }
 
 .homeContainer .loginButton {
-    grid-row: 3;
-    grid-column: 2;
-    justify-self: center;
-    align-self: center;
+  grid-row: 3;
+  grid-column: 2;
+  justify-self: center;
+  align-self: center;
 }
 
 .homeText {
-    grid-row: 2 / 4;
-    grid-column: 3 / 5;
-    justify-self: center;
-    text-align: center;
-    align-self: center;
-    margin: 0 10vw;
+  grid-row: 2 / 4;
+  grid-column: 3 / 5;
+  justify-self: center;
+  text-align: center;
+  align-self: center;
+  margin: 0 10vw;
 }
 
 .signupContainer {
-    display: grid;
-    grid-template: 10vh 50vh / 15vw 70vw 15vw;
+  display: grid;
+  grid-template: 10vh 50vh / 15vw 70vw 15vw;
 }
 
 .signupContainer form {
-    grid-row: 2;
-    grid-column: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
+  grid-row: 2;
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .loginContainer {
-    display: grid;
-    grid-template: 10vh 40vh / 15vw 70vw 15vw;
+  display: grid;
+  grid-template: 10vh 40vh / 15vw 70vw 15vw;
 }
 
 .loginContainer form {
-    grid-row: 2;
-    grid-column: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
+  grid-row: 2;
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .welcomeContainer {
@@ -140,17 +144,41 @@ button {
 
 .homeContainer h3,
 .getStarted h3 {
-    font-size: 1.5rem;
+  font-size: 1.6rem;
 }
 
 .signupContainer label,
-.loginContainer label,
+.loginContainer label {
+    font-size: 1.6rem;
+}
+
+.signupContainer input,
+.loginContainer input,
+.getStarted input {
+    font-size: 1.6rem;
+    border-radius: 12px;
+    border: white;
+    text-align: center;
+}
+
 .getStarted label {
-    font-size: 1.2rem;
+  font-size: 1.3rem;
 }
 
 .savedPlaceContainer {
   grid-row: 2;
   grid-column: 3 / 7;
   margin-left: 7vw;
+}
+
+.noMatchContainer {
+    display: flex;
+    flex-direction: column;
+    margin: 5vh 10vw 0 10vw;
+    align-items: center;
+}
+
+.noMatchText {
+    font-size: 1.5rem;
+    text-align: center;
 }

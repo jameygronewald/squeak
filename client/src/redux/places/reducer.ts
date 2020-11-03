@@ -1,16 +1,21 @@
-import { SAVE_PLACE, GET_SAVED_PLACES } from "./constants";
-import { SavedPlaceObject } from "../../global";
+import { SAVE_PLACE, GET_SAVED_PLACES, FETCH_PLACES } from "./constants";
+import { SearchData, SavedPlaceObject } from "../../global";
 
 interface SavedPlacesState {
+  fetchedPlaces: SearchData[];
   savedPlaces: SavedPlaceObject[];
 }
 
 const initialState: SavedPlacesState = {
+    fetchedPlaces: [],
     savedPlaces: []
 };
 
 export default function placesReducer(state: SavedPlacesState = initialState, action: any) {
     switch(action.type) {
+        case FETCH_PLACES: {
+            return { ...state, fetchedPlaces: action.payload }
+        }
         case GET_SAVED_PLACES: {
             return { ...state, savedPlaces: action.payload }
         }

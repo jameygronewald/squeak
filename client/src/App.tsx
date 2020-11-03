@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
+  Route,
   Switch
 } from "react-router-dom";
 import { UserContext } from "./utils/UserContext";
@@ -11,6 +12,8 @@ import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import { Signup } from "./pages/Signup";
 import { Welcome } from "./pages/Welcome";
+import { Search } from "./pages/Search";
+import { NoMatch } from "./pages/NoMatch";
 import "./App.css";
 
 const App = () => {
@@ -50,7 +53,9 @@ const App = () => {
             <PublicRoute exact path="/" component={Home}/>
             <PublicRoute exact path="/login" component={Login} />
             <PublicRoute exact path="/signup" component={Signup} />
-            <ProtectedRoute exact path="/welcome" component={Welcome} />
+            <ProtectedRoute path="/welcome" component={Welcome} />
+            <Route path="/search" component={Search} />
+            <Route component={NoMatch} />
           </Switch>
         </UserContext.Provider>
       </Router>

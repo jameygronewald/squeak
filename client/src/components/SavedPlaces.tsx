@@ -3,7 +3,7 @@ import store from "../redux/store";
 import { useSelector } from "react-redux";
 import { UserContext } from "../utils/UserContext";
 
-export const SavedPlaces = () => {
+export const SavedPlaces: React.FC = (): JSX.Element => {
   const { sessionToken } = useContext(UserContext);
 
   const places = useSelector((state: any) => state.places.savedPlaces)

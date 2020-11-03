@@ -8,6 +8,11 @@ router.post("/signup", async (req, res) => {
   try {
     const newUserInfo = await req.body;
     if (!newUserInfo) throw new Error();
+    const existingUser = await User.selectUser(newUserInfo.email);
+    console.log(existingUser);
+    if (existingUser) {
+      throw new Error()
+    }
     const keys = Object.keys(newUserInfo);
     const columns = keys.slice(0, -1);
     let values = [];

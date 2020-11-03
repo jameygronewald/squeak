@@ -5,7 +5,7 @@ import { UserContext } from "../../utils/UserContext";
 interface PublicRouteProps {
   exact: boolean;
   path: string;
-  component: React.FC<any>;
+  component: React.FC;
 }
 
 const PublicRoute: React.FC<PublicRouteProps> = (props: PublicRouteProps): JSX.Element => {

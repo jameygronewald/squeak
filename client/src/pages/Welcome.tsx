@@ -19,7 +19,7 @@ export const Welcome: React.FC = (): JSX.Element => {
 
   const { sessionToken } = useContext(UserContext);
 
-  const searchForPlaces = async (): Promise<void> => {
+  const searchForPlaces = async (): Promise<any> => {
     const { search, city } = searchParams;
     const URL: string = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=${search}&location=${city}`;
     const searchConfig: SearchConfig = {
@@ -52,6 +52,10 @@ export const Welcome: React.FC = (): JSX.Element => {
       }
     );
     setSearchPlaces(searchDisplayData);
+    store.dispatch({
+      type: "FETCH_PLACES",
+      payload: searchDisplayData,
+    });
   };
 
   const savePlace = async (place: SearchData): Promise<any> => {
@@ -119,7 +123,7 @@ export const Welcome: React.FC = (): JSX.Element => {
                   savePlace(place);
                 }}
               >
-                Save this place
+                Save place
               </button>
             </ul>
           ))}

@@ -4,12 +4,6 @@ import { tokenHelper } from "../client/src/utils/tokenHelper";
 
 const router = express.Router();
 
-interface ParsedIdObject {
-  data: number;
-  iat: number;
-  exp: number;
-}
-
 router.get("/places/:userId", async (req, res) => {
   try {
     const unparsedUserId: string = req.params.userId;
@@ -21,9 +15,8 @@ router.get("/places/:userId", async (req, res) => {
     }
     const parsedId = parsedUserIdObject.data;
     const savedPlaces = await Place.getSavedPlaces(parsedId);
-    console.log(savedPlaces);
     if (!savedPlaces) throw new Error();
-    res.status(201).json({
+    res.status(200).json({
       error: false,
       body: savedPlaces,
       message: "Successfully retrieved user's saved places.",
@@ -56,7 +49,7 @@ router.post("/places", async (req, res) => {
     }
     const newPlace = await Place.savePlace(columns, values);
     if (!newPlace) throw new Error();
-    res.status(201).json({
+    res.status(200).json({
       error: false,
       body: newPlace,
       message: "Successfully saved new place.",

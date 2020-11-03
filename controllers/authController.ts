@@ -1,6 +1,6 @@
 import * as express from "express";
-import { User } from "../models/User";
-import { tokenHelper } from "../client/src/utils/tokenHelper";
+import User from "../models/User";
+import tokenHelper from "../client/src/utils/tokenHelper";
 
 const router = express.Router();
 
@@ -9,7 +9,6 @@ router.post("/signup", async (req, res) => {
     const newUserInfo = await req.body;
     if (!newUserInfo) throw new Error();
     const existingUser = await User.selectUser(newUserInfo.email);
-    console.log(existingUser);
     if (existingUser) {
       throw new Error()
     }
@@ -30,7 +29,7 @@ router.post("/signup", async (req, res) => {
     });
   } catch (err) {
     console.error(err.message);
-    res.status(401).json({
+    res.status(500).json({
       error: true,
       body: null,
       message: "Unable to create new user.",
@@ -55,7 +54,7 @@ router.post("/login", async (req, res) => {
     });
   } catch (err) {
     console.error(err.message);
-    res.status(401).json({
+    res.status(500).json({
       error: true,
       body: null,
       message: "Unable to log in.",

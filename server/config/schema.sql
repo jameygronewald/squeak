@@ -11,7 +11,7 @@ CREATE TABLE users (
     first_name VARCHAR (100),
     last_name VARCHAR (100)
 );
-
+""
 CREATE TABLE place(
     place_id SERIAL PRIMARY KEY,
     user_id INT NOT NULL,

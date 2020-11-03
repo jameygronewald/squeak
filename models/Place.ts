@@ -1,6 +1,6 @@
-import { ORM } from "../server/config/ORM";
+import ORM from "../server/config/ORM";
 
-export const Place = {
+const Place = {
   getSavedPlaces: async function (id: number) {
     try {
       const result = await ORM.selectAllWhere('place', id);
@@ -19,3 +19,5 @@ export const Place = {
     }
   },
 };
+
+export default Place;

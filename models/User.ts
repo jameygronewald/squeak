@@ -1,6 +1,6 @@
-import { ORM } from "../server/config/ORM";
+import ORM from "../server/config/ORM";
 
-export const User = {
+const User = {
   selectUser: async function (email: string) {
     try {
       const result = await ORM.selectOne("users", "email", email);
@@ -27,3 +27,5 @@ export const User = {
     }
   },
 };
+
+export default User;

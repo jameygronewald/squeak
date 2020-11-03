@@ -1,6 +1,6 @@
 import * as express from "express";
-import { Place } from "../models/Place";
-import { tokenHelper } from "../client/src/utils/tokenHelper";
+import Place from "../models/Place";
+import tokenHelper from "../client/src/utils/tokenHelper";
 
 const router = express.Router();
 

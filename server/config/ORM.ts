@@ -1,6 +1,6 @@
-import { pool } from "./db";
+import pool from "./db";
 
-export const ORM = {
+const ORM = {
   selectAll: async function (table: string) {
     const queryString: string = "SELECT * FROM $1;";
     try {
@@ -66,3 +66,5 @@ export const ORM = {
     }
   },
 };
+
+export default ORM;

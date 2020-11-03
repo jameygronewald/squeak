@@ -29,7 +29,7 @@ router.post("/signup", async (req, res) => {
     });
   } catch (err) {
     console.error(err.message);
-    res.status(401).json({
+    res.status(500).json({
       error: true,
       body: null,
       message: "Unable to create new user.",
@@ -54,7 +54,7 @@ router.post("/login", async (req, res) => {
     });
   } catch (err) {
     console.error(err.message);
-    res.status(401).json({
+    res.status(500).json({
       error: true,
       body: null,
       message: "Unable to log in.",

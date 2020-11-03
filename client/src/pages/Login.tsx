@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import UserContext from "../utils/UserContext";
 import { UserCredentialsState } from "../interfaces";
+import axios from "axios";
 
 const Login: React.FC = (): JSX.Element => {
   const [credentials, setCredentials] = useState<UserCredentialsState>({
@@ -12,23 +13,17 @@ const Login: React.FC = (): JSX.Element => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    if (credentials) loginUser(credentials);
+    if (!credentials.email || !credentials.password) {
+      return window.alert('You must enter your email and password to login.')
+    } else loginUser(credentials);
   };
 
   const loginUser = async (loginInfo: UserCredentialsState): Promise<void> => {
     try {
-      const loginConfig = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(loginInfo),
-      };
-      const response = await fetch("http://localhost:3001/login", loginConfig);
-      const JSONdata = await response.json();
+      const response = await axios.post("/login", loginInfo);
+      if (response.data.error === true) throw new Error();
       if (handleLogin) {
-        handleLogin(JSONdata.body.sessionToken);
+        handleLogin(response.data.body.sessionToken);
       }
     } catch (err) {
       console.error(err.message);

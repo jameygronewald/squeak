@@ -1,18 +1,19 @@
-import React, { useState, useContext } from "react";
-import UserContext from "../utils/UserContext";
-import store from "../redux/store";
+import React, { useState, useContext } from 'react';
+import UserContext from '../utils/UserContext';
+import store from '../redux/store';
 import {
   SearchParams,
   SearchConfig,
   SearchResults,
   SearchData,
-} from "../interfaces";
-import SavedPlaces from "../components/SavedPlaces";
+} from '../interfaces';
+import SavedPlaces from '../components/SavedPlaces';
+import axios from 'axios';
 
 const Welcome: React.FC = (): JSX.Element => {
   const [searchParams, setSearchParams] = useState<SearchParams>({
-    search: "",
-    city: "",
+    search: '',
+    city: '',
   });
 
   const [searchedPlaces, setSearchPlaces] = useState<SearchData[]>([]);
@@ -23,10 +24,10 @@ const Welcome: React.FC = (): JSX.Element => {
     const { search, city } = searchParams;
     const URL: string = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=${search}&location=${city}`;
     const searchConfig: SearchConfig = {
-      method: "GET",
+      method: 'GET',
       headers: {
-        Authorization: "Bearer " + process.env.REACT_APP_YELP_API_KEY,
-        "Content-Type": "application/json",
+        Authorization: 'Bearer ' + process.env.REACT_APP_YELP_API_KEY,
+        'Content-Type': 'application/json',
       },
     };
     const data = await fetch(URL, searchConfig);
@@ -53,30 +54,18 @@ const Welcome: React.FC = (): JSX.Element => {
     );
     setSearchPlaces(searchDisplayData);
     store.dispatch({
-      type: "FETCH_PLACES",
+      type: 'FETCH_PLACES',
       payload: searchDisplayData,
     });
   };
 
   const savePlace = async (place: SearchData): Promise<any> => {
     try {
-      const savePlaceConfig = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(place),
-      };
-      const response = await fetch(
-        "http://localhost:3001/places",
-        savePlaceConfig
-      );
-      const responseData = await response.json();
-      if (responseData.error) throw new Error();
+      const response = await axios.post('/places', place);
+      if (response.data.error === true) throw new Error();
       return store.dispatch({
-        type: "SAVE_PLACE",
-        payload: responseData.body,
+        type: 'SAVE_PLACE',
+        payload: response.data.body,
       });
     } catch (err) {
       console.error(err.message);
@@ -84,29 +73,29 @@ const Welcome: React.FC = (): JSX.Element => {
   };
 
   return (
-    <div className="welcomeContainer">
-      <div className="getStartedContainer">
-        <div className="getStarted">
+    <div className='welcomeContainer'>
+      <div className='getStartedContainer'>
+        <div className='getStarted'>
           <h3>Get Started</h3>
-          <label htmlFor="search">Search by business name: </label>
+          <label htmlFor='search'>Search by business name: </label>
           <input
-            type="text"
-            name="search"
+            type='text'
+            name='search'
             value={searchParams.search}
             onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
               setSearchParams({ ...searchParams, search: e.target.value })
             }
           />
-          <label htmlFor="city"> And city: </label>
+          <label htmlFor='city'> And city: </label>
           <input
-            type="text"
-            name="city"
+            type='text'
+            name='city'
             value={searchParams.city}
             onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
               setSearchParams({ ...searchParams, city: e.target.value })
             }
           />
-          <button type="button" onClick={searchForPlaces}>
+          <button type='button' onClick={searchForPlaces}>
             Search
           </button>
           {searchedPlaces.map((place: SearchData) => (
@@ -118,7 +107,7 @@ const Welcome: React.FC = (): JSX.Element => {
               <li>{place.phone}</li>
               <li>{place.rating}</li>
               <button
-                type="button"
+                type='button'
                 onClick={(): void => {
                   savePlace(place);
                 }}

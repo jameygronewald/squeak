@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { HomeText } from "../components/HomeText";
+import HomeText from "../components/HomeText";
 
-export const Home: React.FC = (): JSX.Element => {
+const Home: React.FC = (): JSX.Element => {
   return (
     <div className="homeContainer">
       <Link className="signupButton" to="/signup">
@@ -16,3 +16,5 @@ export const Home: React.FC = (): JSX.Element => {
     </div>
   );
 };
+
+export default Home;

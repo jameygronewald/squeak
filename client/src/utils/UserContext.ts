@@ -8,4 +8,6 @@ interface ContextProps {
     setAuthStatus: React.Dispatch<React.SetStateAction<{ isAuthenticated: boolean; }>>
 }
 
-export const UserContext = createContext<Partial<ContextProps>>({});
+const UserContext = createContext<Partial<ContextProps>>({});
+
+export default UserContext;

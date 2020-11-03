@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { Header } from "./Header";
-import { Button } from "./Button";
-import { UserContext } from "../utils/UserContext";
+import Header from "./Header";
+import Button from "./Button";
+import UserContext from "../utils/UserContext";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 
 interface LogoutProps extends RouteComponentProps {}

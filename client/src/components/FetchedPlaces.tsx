@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-// export const FetchedPlaces = () => {
+// const FetchedPlaces = () => {
 //     return (
 //         {fetchedPlaces.map((place: SearchData) => (
 //             <ul key={place.yelp_id}>
@@ -23,3 +23,5 @@ import React from 'react'
 //           ))}
 //     )
 // }
+
+// export default FetchedPlaces

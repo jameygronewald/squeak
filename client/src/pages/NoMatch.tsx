@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const NoMatch = () => {
+const NoMatch = () => {
   return (
     <div className="noMatchContainer">
       <h3 className="noMatchText">
@@ -13,3 +13,5 @@ export const NoMatch = () => {
     </div>
   );
 };
+
+export default NoMatch;

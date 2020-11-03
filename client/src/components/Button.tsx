@@ -6,10 +6,12 @@ interface ButtonProps {
     className: string
 }
 
-export const Button: React.FC<ButtonProps> = (props: ButtonProps): JSX.Element => {
+const Button: React.FC<ButtonProps> = (props: ButtonProps): JSX.Element => {
     return (
         <button className={props.className} onClick={props.onClick}>
             {props.text}
         </button>
     )
 }
+
+export default Button;

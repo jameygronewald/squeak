@@ -1,7 +1,7 @@
 import ORM from "../server/config/ORM";
 
 const User = {
-  selectUser: async function (email: string) {
+  selectUser: async (email: string) => {
     try {
       const result = await ORM.selectOne("users", "email", email);
       return result;
@@ -10,7 +10,7 @@ const User = {
     }
   },
 
-  createUser: async function (columns: any, values: any) {
+  createUser: async (columns: any, values: any) => {
     try {
       const result = await ORM.insertOne("users", columns, values);
       return result;
@@ -19,9 +19,10 @@ const User = {
     }
   },
 
-  deleteUser: async function (user_id: string) {
+  deleteUser: async (user_id: string) => {
     try {
-      const result = await ORM.deleteOne("users", user_id);
+      const result = await ORM.deleteOneById("users", user_id);
+      return result;
     } catch (err) {
       console.error(err.message);
     }

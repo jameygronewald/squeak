@@ -1,18 +1,27 @@
-import ORM from "../server/config/ORM";
+import ORM from '../server/config/ORM';
 
 const Place = {
-  getSavedPlaces: async function (id: number) {
+  getSavedPlaces: async (id: number) => {
     try {
-      const result = await ORM.selectAllWhere('place', id);
+      const result = await ORM.selectAllBelongingToUser('place', id);
       return result;
     } catch (err) {
-      console.error(err.message)
+      console.error(err.message);
     }
   },
 
-  savePlace: async function (columns, values) {
+  savePlace: async (columns, values) => {
     try {
-      const result = await ORM.insertOne("place", columns, values);
+      const result = await ORM.insertOne('place', columns, values);
+      return result;
+    } catch (err) {
+      console.error(err.message);
+    }
+  },
+
+  deletePlace: async (id: string) => {
+    try {
+      const result = await ORM.deleteOneById('place', id);
       return result;
     } catch (err) {
       console.error(err.message);

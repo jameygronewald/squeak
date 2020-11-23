@@ -1,6 +1,6 @@
 import * as express from "express";
 import User from "../models/User";
-import tokenHelper from "../client/src/utils/tokenHelper";
+import tokenHelper from "../utils/tokenHelper";
 
 const router = express.Router();
 

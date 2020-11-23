@@ -67,12 +67,10 @@ router.post('/places', async (req, res) => {
 router.delete('/places/:id', async (req, res) => {
   try {
     const placeId = req.params.id;
-    console.log(placeId);
-    const result = await Place.deletePlace(placeId);
-    console.log(result);
+    await Place.deletePlace(placeId);
     res.status(200).json({
       error: false,
-      body: result,
+      body: null,
       message: 'Successfully deleted place.',
     });
   } catch (err) {

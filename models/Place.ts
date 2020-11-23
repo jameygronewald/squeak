@@ -10,7 +10,7 @@ const Place = {
     }
   },
 
-  savePlace: async (columns, values) => {
+  savePlace: async (columns: string[], values: any[]) => {
     try {
       const result = await ORM.insertOne('place', columns, values);
       return result;

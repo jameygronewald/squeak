@@ -1,16 +1,16 @@
-import * as express from "express";
-import Place from "../models/Place";
-import tokenHelper from "../client/src/utils/tokenHelper";
+import * as express from 'express';
+import Place from '../models/Place';
+import tokenHelper from '../utils/tokenHelper';
 
 const router = express.Router();
 
-router.get("/places/:userId", async (req, res) => {
+router.get('/places/:userId', async (req, res) => {
   try {
     const unparsedUserId: string = req.params.userId;
     const parsedUserId = tokenHelper.verifyToken(unparsedUserId);
     if (!parsedUserId) throw new Error();
     let parsedUserIdObject: { data: number };
-    if (typeof parsedUserId == "object") {
+    if (typeof parsedUserId == 'object') {
       parsedUserIdObject = parsedUserId as { data: number };
     }
     const parsedId = parsedUserIdObject.data;
@@ -31,14 +31,14 @@ router.get("/places/:userId", async (req, res) => {
   }
 });
 
-router.post("/places", async (req, res) => {
+router.post('/places', async (req, res) => {
   try {
     const newPlaceData = await req.body;
     const unparsedUserId = newPlaceData.user_id;
     const parsedUserId = tokenHelper.verifyToken(unparsedUserId);
     if (!parsedUserId) throw new Error();
     let parsedUserIdObject: { data: number };
-    if (typeof parsedUserId == "object") {
+    if (typeof parsedUserId == 'object') {
       parsedUserIdObject = parsedUserId as { data: number };
     }
     newPlaceData.user_id = parsedUserIdObject.data;
@@ -52,14 +52,33 @@ router.post("/places", async (req, res) => {
     res.status(200).json({
       error: false,
       body: newPlace,
-      message: "Successfully saved new place.",
+      message: 'Successfully saved new place.',
     });
   } catch (err) {
     console.error(err.message);
     res.status(500).json({
       error: true,
       body: null,
-      message: "Unable to save new place.",
+      message: 'Unable to save new place.',
+    });
+  }
+});
+
+router.delete('/places/:id', async (req, res) => {
+  try {
+    const placeId = req.params.id;
+    await Place.deletePlace(placeId);
+    res.status(200).json({
+      error: false,
+      body: null,
+      message: 'Successfully deleted place.',
+    });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({
+      error: true,
+      body: null,
+      message: 'Server error. Unable to delete place.',
     });
   }
 });

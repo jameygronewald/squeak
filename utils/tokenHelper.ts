@@ -9,20 +9,20 @@ const tokenHelper = {
   },
 
   signjwt: function (id: string) {
-    const tokenSecret = process.env.SECRET;
+    const tokenSecret = process.env.JWT_SECRET;
     // if (tokenSecret !== undefined) {
       return jwt.sign(
         {
           data: id,
         },
         'tokenSecret',
-        { expiresIn: "7d" }
+        { expiresIn: "1y" }
       );
     // }
   },
 
   verifyToken: function (tokenValue: string) {
-    const tokenSecret = process.env.SECRET;
+    // const tokenSecret = process.env.JWT_SECRET;
     // if (tokenSecret !== undefined) {
       return jwt.verify(tokenValue, 'tokenSecret');
     // }

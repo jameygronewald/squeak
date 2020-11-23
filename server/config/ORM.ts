@@ -11,7 +11,7 @@ const ORM = {
     }
   },
 
-  selectAllWhere: async function (table: string, id: number) {
+  selectAllBelongingToUser: async function (table: string, id: number) {
     const queryString: string = `SELECT * FROM ${table} WHERE user_id = $1;`;
     try {
       const result = await pool.query(queryString, [id]);
@@ -31,7 +31,7 @@ const ORM = {
     }
   },
 
-  insertOne: async function (table: string, columns: any, values: any) {
+  insertOne: async function (table: string, columns: string[], values: any[]) {
     let placeholderString = '';
     columns.forEach((column, index) => index === columns.length - 1 ? placeholderString += `$${index + 1}` : placeholderString += `$${index + 1}, `);
     const queryString: string = `INSERT INTO ${table}(${columns}) VALUES(${placeholderString}) RETURNING *;`;
@@ -43,12 +43,14 @@ const ORM = {
     }
   },
 
-  deleteOne: async function (table: string, condition: string) {
-    const queryString: string = "DELETE FROM $1 WHERE id = $2";
+  deleteOneById: async function (table: string, id: string) {
+    const idType = `${table}_id`
+    const queryString: string = `DELETE FROM ${table} WHERE ${idType} = ${id}`;
     try {
-      const result = await pool.query(queryString, [table, condition]);
+      await pool.query(queryString/* , [table, id] */);
+      return {message: 'Success'};
     } catch (err) {
-      console.error(err.message);
+      console.error("ORM: ", err.message);
     }
   },
 

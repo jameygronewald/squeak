@@ -1,4 +1,6 @@
 import * as jwt from "jsonwebtoken";
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 const tokenHelper = {
   generateToken: function (id: string) {
@@ -8,24 +10,20 @@ const tokenHelper = {
     return token;
   },
 
-  signjwt: function (id: string) {
-    const tokenSecret = process.env.JWT_SECRET;
-    // if (tokenSecret !== undefined) {
+  signjwt: (id: string) => {
+    const tokenSecret: string = process.env.JWT_SECRET;
       return jwt.sign(
         {
           data: id,
         },
-        'tokenSecret',
+        tokenSecret,
         { expiresIn: "1y" }
       );
-    // }
   },
 
-  verifyToken: function (tokenValue: string) {
-    // const tokenSecret = process.env.JWT_SECRET;
-    // if (tokenSecret !== undefined) {
-      return jwt.verify(tokenValue, 'tokenSecret');
-    // }
+  verifyToken: (tokenValue: string) => {
+    const tokenSecret: string = process.env.JWT_SECRET;
+      return jwt.verify(tokenValue, tokenSecret);
   },
 };
 

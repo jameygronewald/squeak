@@ -10,9 +10,9 @@ const Place = {
     }
   },
 
-  savePlace: async (columns: string[], values: any[]) => {
+  savePlace: async (columnValuePairs) => {
     try {
-      const result = await ORM.insertOne('place', columns, values);
+      const result = await ORM.insertOne('place', columnValuePairs);
       return result;
     } catch (err) {
       console.error(err.message);

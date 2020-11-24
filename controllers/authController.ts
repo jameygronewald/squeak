@@ -8,20 +8,17 @@ router.post("/signup", async (req, res) => {
   try {
     const newUserInfo = await req.body;
     if (!newUserInfo) throw new Error();
+
     const existingUser = await User.findUserByEmail(newUserInfo.email);
     if (existingUser) {
-      throw new Error()
+      throw new Error('User already exists.')
     }
-    const keys = Object.keys(newUserInfo);
-    const columns = keys.slice(0, -1);
-    let values = [];
-    for (let key in newUserInfo) {
-      values.push(newUserInfo[key]);
-    }
-    const slicedValues = values.slice(0, -1);
-    const newUserData = await User.createUser(columns, slicedValues);
-    const token = tokenHelper.generateToken(newUserData.user_id);
-    if (!newUserData) throw new Error();
+
+    const newUser = await User.createUser(newUserInfo);
+
+    const token = tokenHelper.generateToken(newUser.user_id);
+
+    if (!newUser) throw new Error();
     res.status(201).json({
       error: false,
       body: token,
@@ -40,8 +37,11 @@ router.post("/signup", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const credentials = await req.body;
+
     const userData = await User.findUserByEmail(credentials.email);
-    if (!userData) throw new Error();
+
+    if (!userData) throw new Error('User not found.');
+    
     let token: { sessionToken: string };
     if (credentials.password === userData.password) {
       token = tokenHelper.generateToken(userData.user_id);

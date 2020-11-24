@@ -1,8 +1,8 @@
-import pool from "./db";
+import pool from './db';
 
 const ORM = {
-  selectAll: async function (table: string) {
-    const queryString: string = "SELECT * FROM $1;";
+  findAll: async (table: string) => {
+    const queryString: string = 'SELECT * FROM $1;';
     try {
       const result = await pool.query(queryString, [table]);
       return result;
@@ -11,7 +11,7 @@ const ORM = {
     }
   },
 
-  selectAllBelongingToUser: async function (table: string, id: number) {
+  findAllBelongingToUser: async (table: string, id: number) => {
     const queryString: string = `SELECT * FROM ${table} WHERE user_id = $1;`;
     try {
       const result = await pool.query(queryString, [id]);
@@ -21,7 +21,7 @@ const ORM = {
     }
   },
 
-  selectOne: async function (table: string, column: string, value: string) {
+  findOne: async (table: string, column: string, value: string) => {
     const queryString: string = `SELECT * FROM ${table} WHERE ${column} = $1;`;
     try {
       const result = await pool.query(queryString, [value]);
@@ -31,40 +31,48 @@ const ORM = {
     }
   },
 
-  insertOne: async function (table: string, columns: string[], values: any[]) {
-    let placeholderString = '';
-    columns.forEach((column, index) => index === columns.length - 1 ? placeholderString += `$${index + 1}` : placeholderString += `$${index + 1}, `);
+  insertOne: async (table: string, columns: string[], values: any[]) => {
+    let placeholderString: string = '';
+    columns.forEach((column, index) =>
+      index === columns.length - 1
+        ? (placeholderString += `$${index + 1}`)
+        : (placeholderString += `$${index + 1}, `)
+    );
     const queryString: string = `INSERT INTO ${table}(${columns}) VALUES(${placeholderString}) RETURNING *;`;
     try {
       const result = await pool.query(queryString, [...values]);
       return result.rows[0];
     } catch (err) {
-      console.error("ORM: " + err.message);
+      console.error('ORM: ' + err.message);
     }
   },
 
-  deleteOneById: async function (table: string, id: string) {
-    const idType = `${table}_id`
+  updateOneById: async (table: string, fieldsToUpdate: {}, id: string) => {
+    const idType: string = `${table}_id`;
+    let placeholderString: string = '';
+    for (let column in fieldsToUpdate) {
+      const value = fieldsToUpdate[column];
+      typeof value !== 'string'
+        ? (placeholderString += `${column} = ${value}, `)
+        : (placeholderString += `${column} = '${value}', `);
+    }
+    placeholderString = placeholderString.slice(0, -2);
+    const queryString: string = `UPDATE ${table} SET ${placeholderString} WHERE ${idType} = $1`;
+    try {
+      await pool.query(queryString, [id]);
+      return { updatedFields: fieldsToUpdate };
+    } catch (err) {
+      console.error('ORM: ', err.message);
+    }
+  },
+
+  deleteOneById: async (table: string, id: string) => {
+    const idType: string = `${table}_id`;
     const queryString: string = `DELETE FROM ${table} WHERE ${idType} = ${id}`;
     try {
-      await pool.query(queryString/* , [table, id] */);
-      return {message: 'Success'};
+      await pool.query(queryString);
     } catch (err) {
-      console.error("ORM: ", err.message);
-    }
-  },
-
-  updateOne: async function (
-    table: string,
-    column: string,
-    value: string,
-    id: string
-  ) {
-    const queryString: string = "UPDATE $1 SET $2 = $3 WHERE id = $4";
-    try {
-      const result = await pool.query(queryString, [table, column, value, id]);
-    } catch (err) {
-      console.error(err.message);
+      console.error('ORM: ', err.message);
     }
   },
 };

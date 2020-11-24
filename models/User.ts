@@ -1,9 +1,9 @@
 import ORM from "../server/config/ORM";
 
 const User = {
-  selectUser: async (email: string) => {
+  findUserByEmail: async (email: string) => {
     try {
-      const result = await ORM.selectOne("users", "email", email);
+      const result = await ORM.findOne("users", "email", email);
       return result;
     } catch (err) {
       console.error("Models: " + err.message);

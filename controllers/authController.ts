@@ -8,7 +8,7 @@ router.post("/signup", async (req, res) => {
   try {
     const newUserInfo = await req.body;
     if (!newUserInfo) throw new Error();
-    const existingUser = await User.selectUser(newUserInfo.email);
+    const existingUser = await User.findUserByEmail(newUserInfo.email);
     if (existingUser) {
       throw new Error()
     }
@@ -40,7 +40,7 @@ router.post("/signup", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const credentials = await req.body;
-    const userData = await User.selectUser(credentials.email);
+    const userData = await User.findUserByEmail(credentials.email);
     if (!userData) throw new Error();
     let token: { sessionToken: string };
     if (credentials.password === userData.password) {

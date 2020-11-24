@@ -12,16 +12,17 @@ const initialState: SavedPlacesState = {
 };
 
 export default function placesReducer(state: SavedPlacesState = initialState, action: any) {
-    switch(action.type) {
+    const { type, payload } = action;
+    switch(type) {
         case FETCH_PLACES: {
-            return { ...state, fetchedPlaces: action.payload }
+            return { ...state, fetchedPlaces: payload }
         }
         case GET_SAVED_PLACES: {
-            return { ...state, savedPlaces: action.payload }
+            return { ...state, savedPlaces: payload }
         }
         case SAVE_PLACE: {
             const arrayToReturn = [...state.savedPlaces];
-            arrayToReturn.push(action.payload);
+            arrayToReturn.push(payload);
             return { ...state, savedPlaces: arrayToReturn }
         }
         default:

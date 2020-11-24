@@ -10,9 +10,9 @@ const User = {
     }
   },
 
-  createUser: async (columns: any, values: any) => {
+  createUser: async (columnValuePairs) => {
     try {
-      const result = await ORM.insertOne("users", columns, values);
+      const result = await ORM.insertOne("users", columnValuePairs);
       return result;
     } catch (err) {
       console.error("Model: " + err.message);

@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import HomeText from "../components/HomeText";
+import HomeText from "../../components/HomeText";
 
-const Home: React.FC = (): JSX.Element => {
+const LandingPage: React.FC = (): JSX.Element => {
   return (
     <div className="homeContainer">
       <Link className="signupButton" to="/signup">
@@ -17,4 +17,4 @@ const Home: React.FC = (): JSX.Element => {
   );
 };
 
-export default Home;
+export default LandingPage;

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
-import UserContext from "../utils/UserContext";
-import { UserCredentialsState } from "../interfaces";
+import UserContext from "../../context/UserContext";
+import { UserCredentialsState } from "../../interfaces";
 import axios from "axios";
 
 const Login: React.FC = (): JSX.Element => {

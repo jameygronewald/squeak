@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
-import { SignupInfoState } from '../interfaces';
-import UserContext from '../utils/UserContext';
+import { RegisterInfoState } from '../../interfaces';
+import UserContext from '../../context/UserContext';
 import axios from 'axios';
 
-const Signup: React.FC = (): JSX.Element => {
-  const [signupInfo, setSignupInfo] = useState<SignupInfoState>({
+const Register: React.FC = (): JSX.Element => {
+  const [registerInfo, setRegisterInfo] = useState<RegisterInfoState>({
     email: '',
     password: '',
     passwordConfirm: '',
@@ -14,14 +14,14 @@ const Signup: React.FC = (): JSX.Element => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    signupInfo.password === signupInfo.passwordConfirm
-      ? createUser(signupInfo)
+    registerInfo.password === registerInfo.passwordConfirm
+      ? registerUser(registerInfo)
       : window.alert('Password and confirmation must match');
   };
 
-  const createUser = async (newUserInfo: SignupInfoState) => {
+  const registerUser = async (newUserInfo: RegisterInfoState) => {
     try {
-      const response = await axios.post('/signup', newUserInfo);
+      const response = await axios.post('/register', newUserInfo);
       if (response.data.error === true) throw new Error();
       if (handleLogin) {
         handleLogin(response.data.body.sessionToken);
@@ -38,27 +38,27 @@ const Signup: React.FC = (): JSX.Element => {
         <input
           type='text'
           name='email'
-          value={signupInfo.email}
+          value={registerInfo.email}
           onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-            setSignupInfo({ ...signupInfo, email: e.target.value })
+            setRegisterInfo({ ...registerInfo, email: e.target.value })
           }
         />
         <label htmlFor='password'> Password: </label>
         <input
           type='text'
           name='password'
-          value={signupInfo.password}
+          value={registerInfo.password}
           onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-            setSignupInfo({ ...signupInfo, password: e.target.value })
+            setRegisterInfo({ ...registerInfo, password: e.target.value })
           }
         />
         <label htmlFor='passwordConfirm'> Confirm your password: </label>
         <input
           type='text'
           name='passwordConfirm'
-          value={signupInfo.passwordConfirm}
+          value={registerInfo.passwordConfirm}
           onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-            setSignupInfo({ ...signupInfo, passwordConfirm: e.target.value })
+            setRegisterInfo({ ...registerInfo, passwordConfirm: e.target.value })
           }
         />
         <button type='submit'>Submit</button>
@@ -67,4 +67,4 @@ const Signup: React.FC = (): JSX.Element => {
   );
 };
 
-export default Signup;
+export default Register;

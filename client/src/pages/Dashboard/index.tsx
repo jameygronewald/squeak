@@ -1,16 +1,16 @@
 import React, { useState, useContext } from 'react';
-import UserContext from '../utils/UserContext';
-import store from '../redux/store';
+import UserContext from '../../context/UserContext';
+import store from '../../redux/store';
 import {
   SearchParams,
   SearchConfig,
   SearchResults,
   SearchData,
-} from '../interfaces';
-import SavedPlaces from '../components/SavedPlaces';
+} from '../../interfaces';
+import SavedPlaces from '../../components/SavedPlaces';
 import axios from 'axios';
 
-const Welcome: React.FC = (): JSX.Element => {
+const Dashboard: React.FC = (): JSX.Element => {
   const [searchParams, setSearchParams] = useState<SearchParams>({
     search: '',
     city: '',
@@ -123,4 +123,4 @@ const Welcome: React.FC = (): JSX.Element => {
   );
 };
 
-export default Welcome;
+export default Dashboard;

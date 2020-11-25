@@ -1,7 +1,7 @@
 import tokenHelper from './tokenHelper';
 
 const parseUserIdFromJwt = (jwt: string): number => {
-  const payload = tokenHelper.verifyToken(jwt);
+  const payload = tokenHelper.verifySessionToken(jwt);
   if (!payload) return;
   let parsedUserIdObject: { data: number };
   if (typeof payload == 'object') {

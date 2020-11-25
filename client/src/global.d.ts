@@ -10,7 +10,7 @@ export interface SearchData {
   zip_code: string;
 }
 
-export interface SavedPlaceObject {
+export interface SavedPlaceInterface {
   place_id: number;
   id: string;
   name: string;

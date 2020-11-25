@@ -1,8 +1,6 @@
 import * as express from "express";
 import * as path from "path";
 import * as cors from "cors";
-const authController = require('../controllers/authController');
-const placeController = require('../controllers/placeController');
 
 const app = express();
 
@@ -18,8 +16,8 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.use(authController);
-app.use(placeController);
+app.use(require('../controllers/authController'));
+app.use(require('../controllers/placeController'));
 
 const PORT = process.env.PORT || 3001;
 

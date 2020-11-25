@@ -1,29 +1,27 @@
-import * as jwt from "jsonwebtoken";
+import * as jwt from 'jsonwebtoken';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
 const tokenHelper = {
-  generateToken: function (id: string) {
-    const token = {
-      sessionToken: this.signjwt(id),
-    };
-    return token;
+  generateSessionToken: function (id: string) {
+    const sessionToken = this.signJwt(id);
+    return sessionToken;
   },
 
-  signjwt: (id: string) => {
+  signJwt: (id: string) => {
     const tokenSecret: string = process.env.JWT_SECRET;
-      return jwt.sign(
-        {
-          data: id,
-        },
-        tokenSecret,
-        { expiresIn: "1y" }
-      );
+    return jwt.sign(
+      {
+        data: id,
+      },
+      tokenSecret,
+      { expiresIn: '1y' }
+    );
   },
 
-  verifyToken: (tokenValue: string) => {
+  verifySessionToken: (tokenValue: string) => {
     const tokenSecret: string = process.env.JWT_SECRET;
-      return jwt.verify(tokenValue, tokenSecret);
+    return jwt.verify(tokenValue, tokenSecret);
   },
 };
 

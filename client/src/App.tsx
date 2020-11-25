@@ -4,14 +4,14 @@ import {
   Route,
   Switch
 } from "react-router-dom";
-import UserContext from "./utils/UserContext";
+import UserContext from "./context/UserContext";
 import PublicRoute from "./components/ReactRoutes/PublicRoute";
 import ProtectedRoute from "./components/ReactRoutes/ProtectedRoute";
 import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
+import LandingPage from "./pages/LandingPage";
 import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import Welcome from "./pages/Welcome";
+import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
 import Search from "./pages/Search";
 import NoMatch from "./pages/NoMatch";
 import "./App.css";
@@ -50,10 +50,10 @@ const App = () => {
         >
           <Navbar />
           <Switch>
-            <PublicRoute exact path="/" component={Home}/>
+            <PublicRoute exact path="/" component={LandingPage}/>
             <PublicRoute exact path="/login" component={Login} />
-            <PublicRoute exact path="/signup" component={Signup} />
-            <ProtectedRoute path="/welcome" component={Welcome} />
+            <PublicRoute exact path="/signup" component={Register} />
+            <ProtectedRoute path="/welcome" component={Dashboard} />
             <Route path="/search" component={Search} />
             <Route component={NoMatch} />
           </Switch>

@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
-import store from '../redux/store';
+import store from '../../redux/store';
 import { useSelector } from 'react-redux';
-import UserContext from '../utils/UserContext';
+import UserContext from '../../context/UserContext';
 
 const SavedPlaces: React.FC = (): JSX.Element => {
   const { sessionToken } = useContext(UserContext);

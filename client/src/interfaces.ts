@@ -1,4 +1,4 @@
-export interface SignupInfoState {
+export interface RegisterInfoState {
   email: string;
   password: string;
   passwordConfirm: string;

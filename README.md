@@ -1,2 +1,2 @@
 # Squeak
-Full stack React app with TypeScript and Redux and node/PostgreSQL backend. Features a "homemade" ORM. Also leverages Context API to handle user authentication. In early development stages
+Full stack app with TypeScript/React/Redux frontend and node/PostgreSQL backend. Features a "homemade" ORM. Also leverages Context API and jwt to handle user authentication. In early development stages

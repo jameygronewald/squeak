@@ -1,13 +1,13 @@
 import * as express from 'express';
 import Place from '../models/Place';
-import parseUserIdFromJwt from '../utils/parseUserIdFromJwt';
+import jwtHelper from '../helpers/jwtHelper';
 
 const router = express.Router();
 
 router.get('/places/:userId', async (req, res) => {
   try {
     const unparsedUserId: string = req.params.userId;
-    const parsedUserId: number = parseUserIdFromJwt(unparsedUserId);
+    const parsedUserId: number = jwtHelper.parseUserIdFromJwt(unparsedUserId);
     const savedPlaces = await Place.getSavedPlaces(parsedUserId);
     if (!savedPlaces) throw new Error();
     res.status(200).json({
@@ -30,7 +30,7 @@ router.post('/places', async (req, res) => {
     const newPlaceData = await req.body;
     
     const unparsedUserId: string = newPlaceData.user_id;
-    const parsedUserId: number = parseUserIdFromJwt(unparsedUserId);
+    const parsedUserId: number = jwtHelper.parseUserIdFromJwt(unparsedUserId);
     newPlaceData.user_id = parsedUserId;
 
     const newPlace = await Place.savePlace(newPlaceData);

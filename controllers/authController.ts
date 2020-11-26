@@ -1,6 +1,6 @@
 import * as express from 'express';
 import User from '../models/User';
-import tokenHelper from '../utils/tokenHelper';
+import jwtHelper from '../helpers/jwtHelper';
 
 const router = express.Router();
 
@@ -16,7 +16,7 @@ router.post('/register', async (req, res) => {
 
     const newUser = await User.createUser(newUserInfo);
 
-    const sessionToken = tokenHelper.generateSessionToken(newUser.user_id);
+    const sessionToken = jwtHelper.generateSessionToken(newUser.user_id);
 
     if (!newUser) throw new Error();
     res.status(201).json({
@@ -45,7 +45,7 @@ router.post('/login', async (req, res) => {
     if (credentials.password !== userData.password)
       throw new Error('Incorrect password.');
 
-    const sessionToken: string = tokenHelper.generateSessionToken(userData.user_id);
+    const sessionToken: string = jwtHelper.generateSessionToken(userData.user_id);
 
     if (!sessionToken || sessionToken === undefined ) throw new Error();
     res.status(201).json({

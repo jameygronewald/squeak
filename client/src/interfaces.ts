@@ -15,7 +15,6 @@ export interface SearchParams {
 }
 
 export interface SearchConfig {
-  method: string;
   headers: {
     Authorization: string;
     "Content-Type": string;

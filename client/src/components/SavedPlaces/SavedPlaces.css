@@ -1,0 +1,9 @@
+.savedPlace {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.savedPlaceButton {
+    font-size: .75rem;
+}

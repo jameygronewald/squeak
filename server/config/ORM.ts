@@ -51,7 +51,7 @@ const ORM = {
     valuePlaceholderString = valuePlaceholderString.slice(0, -2);
 
     const queryString: string = `INSERT INTO ${table}(${columnPlaceholderString}) VALUES(${valuePlaceholderString}) RETURNING *;`;
-    console.log(queryString)
+
     try {
       const result = await pool.query(queryString);
       return result.rows[0];

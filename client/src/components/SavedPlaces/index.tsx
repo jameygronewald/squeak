@@ -8,7 +8,7 @@ import './SavedPlaces.css';
 const SavedPlaces: React.FC = (): JSX.Element => {
   const { sessionToken } = useContext(UserContext);
 
-  const places = useSelector((state: any) => state.places.savedPlaces);
+  const savedPlaces = useSelector((state: any) => state.places.savedPlaces);
 
   useEffect(() => {
     if (sessionToken) getSavedPlaces(sessionToken);
@@ -18,7 +18,7 @@ const SavedPlaces: React.FC = (): JSX.Element => {
   return (
     <div className='savedPlaceContainer'>
       <ul>
-        {places.map((place: any) => (
+        {savedPlaces.map((place: any) => (
           <div key={place.place_id} className='savedPlace'>
             <h3>{place.name}</h3>
             <button

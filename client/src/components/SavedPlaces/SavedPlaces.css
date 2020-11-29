@@ -1,3 +1,7 @@
+.savedPlaceContainer h2 {
+    text-decoration: underline;
+}
+
 .savedPlace {
     display: flex;
     flex-direction: row;
@@ -7,4 +11,8 @@
 .savedPlaceButton {
     font-size: .8rem;
     padding: 10px;
+}
+
+.savedPlaceButton :hover {
+    color: black;
 }

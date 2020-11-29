@@ -1,11 +1,8 @@
 import React, { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import UserContext from '../../context/UserContext';
-import { useSelector } from 'react-redux';
-import { savePlace, fetchPlaces } from '../../redux/places/actions';
-import {
-  SearchParams,
-  SearchData,
-} from '../../interfaces';
+import { fetchPlaces } from '../../redux/places/actions';
+import { SearchParams } from '../../interfaces';
 import SavedPlaces from '../../components/SavedPlaces';
 
 const Dashboard: React.FC = (): JSX.Element => {
@@ -13,8 +10,6 @@ const Dashboard: React.FC = (): JSX.Element => {
     search: '',
     city: '',
   });
-
-  const fetchedPlaces = useSelector((state: any) => state.places.fetchedPlaces);
 
   const { sessionToken } = useContext(UserContext);
 
@@ -42,26 +37,15 @@ const Dashboard: React.FC = (): JSX.Element => {
                 setSearchParams({ ...searchParams, city: e.target.value })
               }
             />
-            <button
-              type='button'
-              onClick={fetchPlaces(searchParams, sessionToken)}
-            >
-              Search
-            </button>
-          </div>
-          {fetchedPlaces.map((place: SearchData) => (
-            <ul key={place.yelp_id}>
-              <h3>{place.name}</h3>
-              <li>
-                Address: {place.address1} / {place.city}, {place.state}
-              </li>
-              <li>Phone: {place.phone}</li>
-              <li>Rating: {place.rating}</li>
-              <button type='button' onClick={savePlace(place)}>
-                Save place
+            <Link to='/search'>
+              <button
+                type='button'
+                onClick={fetchPlaces(searchParams, sessionToken)}
+              >
+                Search
               </button>
-            </ul>
-          ))}
+            </Link>
+          </div>
         </div>
       </div>
       <SavedPlaces />

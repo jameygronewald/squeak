@@ -93,10 +93,9 @@ export const savePlace = (place: SearchData) => async () => {
 
 export const deletePlace = (placeId: number) => async () => {
   try {
-    const res = await axios.delete(`/places/${placeId}`);
+    await axios.delete(`/places/${placeId}`);
 
     store.dispatch({ type: DELETE_PLACE, payload: placeId });
-    alert(res.data.message);
   } catch (error) {
     alert('Error updating redux state.');
   }

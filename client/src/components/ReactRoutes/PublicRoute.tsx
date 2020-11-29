@@ -13,7 +13,7 @@ const PublicRoute: React.FC<PublicRouteProps> = (props: PublicRouteProps): JSX.E
   const Component = props.component;
 
   return authStatus && authStatus.isAuthenticated ? (
-    <Redirect to="/welcome" />
+    <Redirect to="/dashboard" />
   ) : (
     <Component />
   );

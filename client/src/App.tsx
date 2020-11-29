@@ -12,7 +12,7 @@ import LandingPage from "./pages/LandingPage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
-import Search from "./pages/Search";
+import Search from "./pages/SearchResults";
 import NoMatch from "./pages/NoMatch";
 import "./App.css";
 
@@ -53,7 +53,7 @@ const App = () => {
             <PublicRoute exact path="/" component={LandingPage}/>
             <PublicRoute exact path="/login" component={Login} />
             <PublicRoute exact path="/signup" component={Register} />
-            <ProtectedRoute path="/welcome" component={Dashboard} />
+            <ProtectedRoute path="/dashboard" component={Dashboard} />
             <Route path="/search" component={Search} />
             <Route component={NoMatch} />
           </Switch>

@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import UserContext from '../../context/UserContext';
 import { getSavedPlaces, deletePlace } from '../../redux/places/actions';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import './SavedPlaces.css';
 
@@ -17,6 +18,7 @@ const SavedPlaces: React.FC = (): JSX.Element => {
   // TODO MAKE A TABLE FOR SAVED PLACE DATA
   return (
     <div className='savedPlaceContainer'>
+      <h2>Top Rated Saved Places</h2>
       <ul>
         {savedPlaces.map((place: any) => (
           <div key={place.place_id} className='savedPlace'>
@@ -25,7 +27,7 @@ const SavedPlaces: React.FC = (): JSX.Element => {
               className='savedPlaceButton'
               onClick={deletePlace(place.place_id)}
             >
-              DELETE
+              <DeleteIcon />
             </button>
           </div>
         ))}

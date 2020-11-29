@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import UserContext from '../../context/UserContext';
 import store from '../../redux/store';
+import { addExtraQuote } from './functions';
 import {
   SearchParams,
   SearchConfig,
@@ -60,6 +61,14 @@ const Dashboard: React.FC = (): JSX.Element => {
   };
 
   const savePlace = async (place: SearchData): Promise<any> => {
+    const { name, address1, city } = place;
+    const formattedValues = addExtraQuote(name, address1, city);
+    place = {
+      ...place,
+      name: formattedValues[0],
+      address1: formattedValues[1],
+      city: formattedValues[2],
+    };
     try {
       const response = await axios.post('/places', place);
       if (response.data.error === true) throw new Error();
@@ -76,28 +85,30 @@ const Dashboard: React.FC = (): JSX.Element => {
     <div className='welcomeContainer'>
       <div className='getStartedContainer'>
         <div className='getStarted'>
-          <h3>Get Started</h3>
-          <label htmlFor='search'>Search by business name: </label>
-          <input
-            type='text'
-            name='search'
-            value={searchParams.search}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-              setSearchParams({ ...searchParams, search: e.target.value })
-            }
-          />
-          <label htmlFor='city'> And city: </label>
-          <input
-            type='text'
-            name='city'
-            value={searchParams.city}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-              setSearchParams({ ...searchParams, city: e.target.value })
-            }
-          />
-          <button type='button' onClick={searchForPlaces}>
-            Search
-          </button>
+          <div className='getStartedForm'>
+            <h3>Get Started</h3>
+            <label htmlFor='search'>Search by business name: </label>
+            <input
+              type='text'
+              name='search'
+              value={searchParams.search}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
+                setSearchParams({ ...searchParams, search: e.target.value })
+              }
+            />
+            <label htmlFor='city'> And city: </label>
+            <input
+              type='text'
+              name='city'
+              value={searchParams.city}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
+                setSearchParams({ ...searchParams, city: e.target.value })
+              }
+            />
+            <button type='button' onClick={searchForPlaces}>
+              Search
+            </button>
+          </div>
           {searchedPlaces.map((place: SearchData) => (
             <ul key={place.yelp_id}>
               <h3>{place.name}</h3>

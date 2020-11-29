@@ -1,15 +1,12 @@
 import React, { useState, useContext } from 'react';
 import UserContext from '../../context/UserContext';
-import store from '../../redux/store';
-import { addExtraQuote } from './functions';
+import { useSelector } from 'react-redux';
+import { savePlace, fetchPlaces } from '../../redux/places/actions';
 import {
   SearchParams,
-  SearchConfig,
-  SearchResults,
   SearchData,
 } from '../../interfaces';
 import SavedPlaces from '../../components/SavedPlaces';
-import axios from 'axios';
 
 const Dashboard: React.FC = (): JSX.Element => {
   const [searchParams, setSearchParams] = useState<SearchParams>({
@@ -17,69 +14,9 @@ const Dashboard: React.FC = (): JSX.Element => {
     city: '',
   });
 
-  const [searchedPlaces, setSearchPlaces] = useState<SearchData[]>([]);
+  const fetchedPlaces = useSelector((state: any) => state.places.fetchedPlaces);
 
   const { sessionToken } = useContext(UserContext);
-
-  const searchForPlaces = async (): Promise<any> => {
-    const { search, city } = searchParams;
-    const URL: string = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=${search}&location=${city}`;
-    const searchConfig: SearchConfig = {
-      method: 'GET',
-      headers: {
-        Authorization: 'Bearer ' + process.env.REACT_APP_YELP_API_KEY,
-        'Content-Type': 'application/json',
-      },
-    };
-    const data = await fetch(URL, searchConfig);
-    const dataJSON = await data.json();
-    const searchResults = dataJSON.businesses;
-    const searchDisplayData: SearchData[] = searchResults.map(
-      (business: SearchResults) => {
-        const { id, name, phone, rating } = business;
-        const { address1, city, state, zip_code } = business.location;
-        const yelp_id = id;
-        const user_id = sessionToken;
-        return {
-          yelp_id,
-          user_id,
-          name,
-          phone,
-          rating,
-          address1,
-          city,
-          state,
-          zip_code,
-        };
-      }
-    );
-    setSearchPlaces(searchDisplayData);
-    store.dispatch({
-      type: 'FETCH_PLACES',
-      payload: searchDisplayData,
-    });
-  };
-
-  const savePlace = async (place: SearchData): Promise<any> => {
-    const { name, address1, city } = place;
-    const formattedValues = addExtraQuote(name, address1, city);
-    place = {
-      ...place,
-      name: formattedValues[0],
-      address1: formattedValues[1],
-      city: formattedValues[2],
-    };
-    try {
-      const response = await axios.post('/places', place);
-      if (response.data.error === true) throw new Error();
-      return store.dispatch({
-        type: 'SAVE_PLACE',
-        payload: response.data.body,
-      });
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
 
   return (
     <div className='welcomeContainer'>
@@ -105,24 +42,22 @@ const Dashboard: React.FC = (): JSX.Element => {
                 setSearchParams({ ...searchParams, city: e.target.value })
               }
             />
-            <button type='button' onClick={searchForPlaces}>
+            <button
+              type='button'
+              onClick={fetchPlaces(searchParams, sessionToken)}
+            >
               Search
             </button>
           </div>
-          {searchedPlaces.map((place: SearchData) => (
+          {fetchedPlaces.map((place: SearchData) => (
             <ul key={place.yelp_id}>
               <h3>{place.name}</h3>
               <li>
-                {place.address1} / {place.city}, {place.state}
+                Address: {place.address1} / {place.city}, {place.state}
               </li>
-              <li>{place.phone}</li>
-              <li>{place.rating}</li>
-              <button
-                type='button'
-                onClick={(): void => {
-                  savePlace(place);
-                }}
-              >
+              <li>Phone: {place.phone}</li>
+              <li>Rating: {place.rating}</li>
+              <button type='button' onClick={savePlace(place)}>
                 Save place
               </button>
             </ul>

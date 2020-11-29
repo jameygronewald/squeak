@@ -30,9 +30,7 @@ const placesReducer = (state: SavedPlacesState = initialState, action: any) => {
       return { ...state, savedPlaces: [] };
     }
     case SAVE_PLACE: {
-      const arrayToReturn = [...state.savedPlaces];
-      arrayToReturn.push(payload);
-      return { ...state, savedPlaces: arrayToReturn };
+      return { ...state, savedPlaces: [...state.savedPlaces, payload] };
     }
     case DELETE_PLACE: {
       return {

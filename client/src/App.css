@@ -181,15 +181,3 @@ button {
   grid-column: 4 / 7;
   margin-left: 7vw;
 }
-
-.noMatchContainer {
-  display: flex;
-  flex-direction: column;
-  margin: 5vh 10vw 0 10vw;
-  align-items: center;
-}
-
-.noMatchText {
-  font-size: 1.5rem;
-  text-align: center;
-}

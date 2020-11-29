@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import Header from "../Header";
 import Button from "../Button";
 import UserContext from "../../context/UserContext";
+import { clearPlaceState } from '../../redux/places/actions';
 import { RouteComponentProps, withRouter } from "react-router-dom";
 
 interface LogoutProps extends RouteComponentProps {}
@@ -13,6 +14,7 @@ const Navbar: React.FC<LogoutProps> = ({ history }): JSX.Element => {
     localStorage.clear();
     if (setSessionToken) setSessionToken('');
     if (setAuthStatus) setAuthStatus({ isAuthenticated: false });
+    clearPlaceState();
     history.push("/");
   };
 

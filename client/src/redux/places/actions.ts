@@ -1,63 +1,15 @@
 import axios from 'axios';
 import store from '../store';
 import {
+  FETCH_PLACES,
+  GET_SAVED_PLACES,
   SAVE_PLACE,
   DELETE_PLACE,
-  GET_SAVED_PLACES,
-  CLEAR_SAVED_PLACES,
-  FETCH_PLACES,
+  CLEAR_PLACE_STATE,
 } from './constants';
 import { addExtraQuote } from './helpers';
 import { SearchData } from '../../global';
 import { SearchConfig, SearchResults } from '../../interfaces';
-
-export const savePlace = (place: SearchData) => async () => {
-  const { name, address1, city } = place;
-  const formattedValues = addExtraQuote(name, address1, city);
-  place = {
-    ...place,
-    name: formattedValues[0],
-    address1: formattedValues[1],
-    city: formattedValues[2],
-  };
-  try {
-    const response = await axios.post('/places', place);
-    if (response.data.error === true) throw new Error(response.data.message);
-    store.dispatch({
-      type: SAVE_PLACE,
-      payload: response.data.body,
-    });
-  } catch (err) {
-    console.error(err.message);
-  }
-};
-
-export const deletePlace = (placeId: number) => async () => {
-  try {
-    const res = await axios.delete(`/places/${placeId}`);
-
-    store.dispatch({ type: DELETE_PLACE, payload: placeId });
-    alert(res.data.message);
-  } catch (error) {
-    alert('Error updating redux state.');
-  }
-};
-
-export const getSavedPlaces = async (sessionToken: string) => {
-  try {
-    const response = await axios.get(`/places/${sessionToken}`);
-    store.dispatch({
-      type: GET_SAVED_PLACES,
-      payload: response.data.body,
-    });
-  } catch (error) {
-    alert('Error getting saved places.');
-  }
-};
-
-export const clearSavedPlaces = () => {
-  return { type: CLEAR_SAVED_PLACES };
-};
 
 export const fetchPlaces = (
   searchParams: any,
@@ -100,6 +52,59 @@ export const fetchPlaces = (
       type: FETCH_PLACES,
       payload: searchDisplayData,
     });
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
+export const getSavedPlaces = async (sessionToken: string) => {
+  try {
+    const response = await axios.get(`/places/${sessionToken}`);
+    store.dispatch({
+      type: GET_SAVED_PLACES,
+      payload: response.data.body,
+    });
+  } catch (error) {
+    console.error(error.message);
+    alert('Error getting saved places.');
+  }
+};
+
+export const savePlace = (place: SearchData) => async () => {
+  const { name, address1, city } = place;
+  const formattedValues = addExtraQuote(name, address1, city);
+  place = {
+    ...place,
+    name: formattedValues[0],
+    address1: formattedValues[1],
+    city: formattedValues[2],
+  };
+  try {
+    const response = await axios.post('/places', place);
+    if (response.data.error === true) throw new Error(response.data.message);
+    store.dispatch({
+      type: SAVE_PLACE,
+      payload: response.data.body,
+    });
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
+export const deletePlace = (placeId: number) => async () => {
+  try {
+    const res = await axios.delete(`/places/${placeId}`);
+
+    store.dispatch({ type: DELETE_PLACE, payload: placeId });
+    alert(res.data.message);
+  } catch (error) {
+    alert('Error updating redux state.');
+  }
+};
+
+export const clearPlaceState = () => {
+  try {
+    store.dispatch({ type: CLEAR_PLACE_STATE });
   } catch (error) {
     console.error(error.message);
   }

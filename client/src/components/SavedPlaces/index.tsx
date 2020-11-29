@@ -1,7 +1,9 @@
 import React, { useEffect, useContext } from 'react';
-import store from '../../redux/store';
 import { useSelector } from 'react-redux';
 import UserContext from '../../context/UserContext';
+import { getSavedPlaces, deletePlace } from '../../redux/places/actions';
+
+import './SavedPlaces.css';
 
 const SavedPlaces: React.FC = (): JSX.Element => {
   const { sessionToken } = useContext(UserContext);
@@ -9,24 +11,23 @@ const SavedPlaces: React.FC = (): JSX.Element => {
   const places = useSelector((state: any) => state.places.savedPlaces);
 
   useEffect(() => {
-    getSavedPlaces();
+    if (sessionToken) getSavedPlaces(sessionToken);
   }, []);
 
-  const getSavedPlaces = async () => {
-    const URL: string = 'http://localhost:3001/places/' + sessionToken;
-    const response = await fetch(URL);
-    const responseData = await response.json();
-    store.dispatch({
-      type: 'GET_SAVED_PLACES',
-      payload: responseData.body,
-    });
-  };
-// TODO MAKE A TABLE FOR SAVED PLACE DATA
+  // TODO MAKE A TABLE FOR SAVED PLACE DATA
   return (
     <div className='savedPlaceContainer'>
       <ul>
         {places.map((place: any) => (
-          <h3 key={place.place_id}>{place.name}</h3>
+          <div key={place.place_id} className='savedPlace'>
+            <h3>{place.name}</h3>
+            <button
+              className='savedPlaceButton'
+              onClick={deletePlace(place.place_id)}
+            >
+              DELETE
+            </button>
+          </div>
         ))}
       </ul>
     </div>

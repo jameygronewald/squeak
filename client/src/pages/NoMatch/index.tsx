@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './NoMatch.css';
 
-const NoMatch = () => {
+const NoMatch: React.FC = (): JSX.Element => {
   return (
     <div className='noMatchContainer'>
       <h3 className='noMatchText'>

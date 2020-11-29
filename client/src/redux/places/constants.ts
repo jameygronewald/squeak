@@ -1,4 +1,5 @@
 export const SAVE_PLACE = 'SAVE_PLACE';
+export const DELETE_PLACE = 'DELETE_PLACE';
 export const GET_SAVED_PLACES = 'GET_SAVED_PLACES';
 export const CLEAR_SAVED_PLACES = 'CLEAR_SAVED_PLACES';
 export const FETCH_PLACES = 'FETCH_PLACES';

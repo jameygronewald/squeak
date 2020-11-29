@@ -1,5 +1,11 @@
-import { SAVE_PLACE, GET_SAVED_PLACES, CLEAR_SAVED_PLACES, FETCH_PLACES } from "./constants";
-import { SearchData, SavedPlaceInterface } from "../../global";
+import {
+  SAVE_PLACE,
+  DELETE_PLACE,
+  GET_SAVED_PLACES,
+  CLEAR_SAVED_PLACES,
+  FETCH_PLACES,
+} from './constants';
+import { SearchData, SavedPlaceInterface } from '../../global';
 
 interface SavedPlacesState {
   fetchedPlaces: SearchData[];
@@ -7,28 +13,38 @@ interface SavedPlacesState {
 }
 
 const initialState: SavedPlacesState = {
-    fetchedPlaces: [],
-    savedPlaces: []
+  fetchedPlaces: [],
+  savedPlaces: [],
 };
 
-export default function placesReducer(state: SavedPlacesState = initialState, action: any) {
-    const { type, payload } = action;
-    switch(type) {
-        case FETCH_PLACES: {
-            return { ...state, fetchedPlaces: payload }
-        }
-        case GET_SAVED_PLACES: {
-            return { ...state, savedPlaces: payload }
-        }
-        case CLEAR_SAVED_PLACES: {
-            return { ...state, savedPlaces: []}
-        }
-        case SAVE_PLACE: {
-            const arrayToReturn = [...state.savedPlaces];
-            arrayToReturn.push(payload);
-            return { ...state, savedPlaces: arrayToReturn }
-        }
-        default:
-            return state
+const placesReducer = (state: SavedPlacesState = initialState, action: any) => {
+  const { type, payload } = action;
+  switch (type) {
+    case FETCH_PLACES: {
+      return { ...state, fetchedPlaces: payload };
     }
-}
+    case GET_SAVED_PLACES: {
+      return { ...state, savedPlaces: payload };
+    }
+    case CLEAR_SAVED_PLACES: {
+      return { ...state, savedPlaces: [] };
+    }
+    case SAVE_PLACE: {
+      const arrayToReturn = [...state.savedPlaces];
+      arrayToReturn.push(payload);
+      return { ...state, savedPlaces: arrayToReturn };
+    }
+    case DELETE_PLACE: {
+      return {
+        ...state,
+        savedPlaces: state.savedPlaces.filter(
+          place => place.place_id !== payload
+        ),
+      };
+    }
+    default:
+      return state;
+  }
+};
+
+export default placesReducer;

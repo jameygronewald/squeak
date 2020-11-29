@@ -5,8 +5,8 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   background: #133b5c;
   color: #fddb3a;
 }
@@ -19,7 +19,7 @@ button {
   font-size: 1.5rem;
   font-weight: bolder;
   color: #f4f4f4;
-  padding:10px 20px;
+  padding: 10px 20px;
   margin: 5px;
   border: #fddb3a solid 2.5px;
   border-radius: 50%;
@@ -39,7 +39,7 @@ button {
 }
 
 .navSpacer {
-    width: 10vw;
+  width: 10vw;
 }
 
 .hide {
@@ -136,49 +136,60 @@ button {
   align-items: center;
 }
 
-.getStarted h3,
-.getStarted label,
-.getStarted input {
+.getStarted ul {
+  align-self: flex-start;
+}
+
+.getStartedForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: flex-start;
+}
+
+.getStartedForm h3,
+.getStartedForm label,
+.getStartedForm input {
   margin: 5px;
 }
 
 .homeContainer h3,
-.getStarted h3 {
+.getStartedForm h3 {
   font-size: 1.6rem;
 }
 
 .signupContainer label,
 .loginContainer label {
-    font-size: 1.6rem;
+  font-size: 1.6rem;
 }
 
 .signupContainer input,
 .loginContainer input,
-.getStarted input {
-    font-size: 1.6rem;
-    border-radius: 12px;
-    border: white;
-    text-align: center;
+.getStartedForm input {
+  font-size: 1.6rem;
+  border-radius: 12px;
+  border: white;
+  text-align: center;
 }
 
-.getStarted label {
+.getStartedForm label {
   font-size: 1.3rem;
 }
 
 .savedPlaceContainer {
   grid-row: 2;
-  grid-column: 3 / 7;
+  grid-column: 4 / 7;
   margin-left: 7vw;
 }
 
 .noMatchContainer {
-    display: flex;
-    flex-direction: column;
-    margin: 5vh 10vw 0 10vw;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 5vh 10vw 0 10vw;
+  align-items: center;
 }
 
 .noMatchText {
-    font-size: 1.5rem;
-    text-align: center;
+  font-size: 1.5rem;
+  text-align: center;
 }

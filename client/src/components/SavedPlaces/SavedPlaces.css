@@ -6,6 +6,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin: 10px;
 }
 
 .savedPlaceButton {
@@ -13,6 +14,8 @@
     padding: 10px;
 }
 
-.savedPlaceButton :hover {
+.savedPlaceButton:hover {
     color: black;
+    background: red;
+    border: solid white 2.5px;
 }

@@ -4,7 +4,7 @@ import UserContext from '../../context/UserContext';
 import { getSavedPlaces, deletePlace } from '../../redux/places/actions';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import './SavedPlaces.css';
+import './style.css';
 
 const SavedPlaces: React.FC = (): JSX.Element => {
   const { sessionToken } = useContext(UserContext);

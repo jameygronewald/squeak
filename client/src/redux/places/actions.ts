@@ -5,6 +5,8 @@ import {
   GET_SAVED_PLACES,
   SAVE_PLACE,
   DELETE_PLACE,
+  CLEAR_FETCHED_PLACES_STATE,
+  CLEAR_SAVED_PLACES_STATE,
   CLEAR_PLACE_STATE,
 } from './constants';
 import { addExtraQuote } from './helpers';
@@ -48,6 +50,9 @@ export const fetchPlaces = (
         };
       }
     );
+
+    localStorage.setItem('fetchedPlaces', JSON.stringify(searchDisplayData));
+
     store.dispatch({
       type: FETCH_PLACES,
       payload: searchDisplayData,
@@ -98,6 +103,23 @@ export const deletePlace = (placeId: number) => async () => {
     store.dispatch({ type: DELETE_PLACE, payload: placeId });
   } catch (error) {
     alert('Error updating redux state.');
+  }
+};
+
+export const clearFetchedPlacesState = () => {
+  localStorage.removeItem('fetchedPlaces');
+  try {
+    store.dispatch({ type: CLEAR_FETCHED_PLACES_STATE });
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
+export const clearSavedPlacesState = () => {
+  try {
+    store.dispatch({ type: CLEAR_SAVED_PLACES_STATE });
+  } catch (error) {
+    console.error(error.message);
   }
 };
 

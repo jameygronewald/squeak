@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './NoMatch.css';
+import './style.css';
 
 const NoMatch: React.FC = (): JSX.Element => {
   return (

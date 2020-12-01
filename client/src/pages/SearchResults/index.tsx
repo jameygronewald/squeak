@@ -1,17 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Spinner from '../../components/Spinner';
-import { clearPlaceState, savePlace } from '../../redux/places/actions';
+import { clearFetchedPlacesState, savePlace } from '../../redux/places/actions';
 import { SearchData } from '../../interfaces';
 import { useSelector } from 'react-redux';
 
+import './style.css';
+
 const Search: React.FC = (): JSX.Element => {
-  const fetchedPlaces = useSelector((state: any) => state.places.fetchedPlaces);
+
+  
+  let fetchedPlaces: [] = useSelector(
+    (state: any) => state.places.fetchedPlaces
+  );
+
+  if (fetchedPlaces.length === 0 && (localStorage.getItem('fetchedPlaces') !== null)) {
+    fetchedPlaces = JSON.parse(localStorage.getItem('fetchedPlaces') as string);
+  }
 
   return (
-    <>
+    <div className='searchPageContainer'>
       <Link to='/dashboard'>
-        <button onClick={clearPlaceState}>Back to dashboard</button>
+        <button onClick={clearFetchedPlacesState}>Back to dashboard</button>
       </Link>
       {fetchedPlaces.length === 0 ? (
         <Spinner />
@@ -30,7 +40,7 @@ const Search: React.FC = (): JSX.Element => {
           </ul>
         ))
       )}
-    </>
+    </div>
   );
 };
 

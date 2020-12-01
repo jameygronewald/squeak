@@ -3,7 +3,9 @@ import {
   GET_SAVED_PLACES,
   SAVE_PLACE,
   DELETE_PLACE,
-  CLEAR_PLACE_STATE,
+  CLEAR_FETCHED_PLACES_STATE,
+  CLEAR_SAVED_PLACES_STATE,
+  CLEAR_PLACE_STATE
 } from './constants';
 import { SearchData, SavedPlaceInterface } from '../../global';
 
@@ -36,6 +38,12 @@ const placesReducer = (state: SavedPlacesState = initialState, action: any) => {
           place => place.place_id !== payload
         ),
       };
+    }
+    case CLEAR_FETCHED_PLACES_STATE: {
+      return { ...state, fetchedPlaces: [] };
+    }
+    case CLEAR_SAVED_PLACES_STATE: {
+      return { ...state, savedPlaces: [] };
     }
     case CLEAR_PLACE_STATE: {
       return { ...state, fetchedPlaces: [], savedPlaces: [] };

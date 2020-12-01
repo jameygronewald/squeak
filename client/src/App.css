@@ -24,6 +24,7 @@ button {
   border: #fddb3a solid 2.5px;
   border-radius: 50%;
   background: #1e5f74;
+  cursor: pointer;
 }
 
 .navbar {

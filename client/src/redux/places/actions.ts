@@ -11,25 +11,15 @@ import {
 } from './constants';
 import { addExtraQuote } from './helpers';
 import { SearchData } from '../../global';
-import { SearchConfig, SearchResults } from '../../interfaces';
+import { SearchResults } from '../../interfaces';
 
 export const fetchPlaces = (
   searchParams: any,
   sessionToken: string | undefined
 ) => async () => {
   try {
-    const { search, city } = searchParams;
-    const URL: string = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=${search}&location=${city}`;
-
-    const searchConfig: SearchConfig = {
-      headers: {
-        Authorization: 'Bearer ' + process.env.REACT_APP_YELP_API_KEY,
-        'Content-Type': 'application/json',
-      },
-    };
-
-    const res = await axios.get(URL, searchConfig);
-    const searchResults = res.data.businesses;
+    const res = await axios.post('/places/fetch', searchParams);
+    const searchResults = res.data.body;
 
     const searchDisplayData: SearchData[] = searchResults.map(
       (business: SearchResults) => {

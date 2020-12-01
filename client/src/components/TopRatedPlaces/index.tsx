@@ -6,7 +6,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 import './style.css';
 
-const SavedPlaces: React.FC = (): JSX.Element => {
+const TopRatedPlaces: React.FC = (): JSX.Element => {
   const { sessionToken } = useContext(UserContext);
 
   const savedPlaces = useSelector((state: any) => state.places.savedPlaces);
@@ -36,4 +36,4 @@ const SavedPlaces: React.FC = (): JSX.Element => {
   );
 };
 
-export default SavedPlaces;
+export default TopRatedPlaces;

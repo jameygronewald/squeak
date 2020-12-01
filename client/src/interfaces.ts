@@ -14,13 +14,6 @@ export interface SearchParams {
   city: string;
 }
 
-export interface SearchConfig {
-  headers: {
-    Authorization: string;
-    "Content-Type": string;
-  };
-}
-
 export interface SearchResults {
   alias: string;
   categories: object[];

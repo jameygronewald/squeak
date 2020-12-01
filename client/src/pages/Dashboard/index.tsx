@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import UserContext from '../../context/UserContext';
 import { fetchPlaces } from '../../redux/places/actions';
 import { SearchParams } from '../../interfaces';
-import SavedPlaces from '../../components/SavedPlaces';
+import TopRatedPlaces from '../../components/TopRatedPlaces';
 
 const Dashboard: React.FC = (): JSX.Element => {
   const [searchParams, setSearchParams] = useState<SearchParams>({
@@ -48,7 +48,7 @@ const Dashboard: React.FC = (): JSX.Element => {
           </div>
         </div>
       </div>
-      <SavedPlaces />
+      <TopRatedPlaces />
     </div>
   );
 };

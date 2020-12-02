@@ -19,7 +19,7 @@ const Search: React.FC = (): JSX.Element => {
   }
 
   return (
-    <div className='searchPageContainer'>
+    <div className='searchResultsContainer'>
       <Link to='/dashboard'>
         <button onClick={clearFetchedPlacesState}>Back to dashboard</button>
       </Link>
@@ -27,13 +27,13 @@ const Search: React.FC = (): JSX.Element => {
         <Spinner />
       ) : (
         fetchedPlaces.map((place: SearchData) => (
-          <ul key={place.yelp_id}>
-            <h3>{place.name}</h3>
-            <li>
-              Address: {place.address1} / {place.city}, {place.state}
-            </li>
-            <li>Phone: {place.phone}</li>
-            <li>Rating: {place.rating}</li>
+          <ul key={place.yelp_id} className='searchResult'>
+            <h2>{place.name}</h2>
+            <p>
+              <span>Address:</span> {place.address1} / {place.city}, {place.state}
+            </p>
+            <p><span>Phone:</span> {place.phone}</p>
+            <p><span>Rating:</span> {place.rating}</p>
             <button type='button' onClick={savePlace(place)}>
               Save place
             </button>

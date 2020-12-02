@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import Header from "../Header";
-import Button from "../Button";
 import UserContext from "../../context/UserContext";
 import { clearPlaceState } from '../../redux/places/actions';
 import { RouteComponentProps, withRouter } from "react-router-dom";
@@ -25,7 +24,7 @@ const Navbar: React.FC<LogoutProps> = ({ history }): JSX.Element => {
         text={authStatus?.isAuthenticated ? "Squeak" : "Welcome to Squeak"}
         className="navHeader"
       />
-      {authStatus?.isAuthenticated && <Button className="logoutButton" text="Log Out" onClick={logoutUser} />}
+      {authStatus?.isAuthenticated && <button className="logoutButton" onClick={logoutUser}>Log Out</button>}
     </div>
   );
 };

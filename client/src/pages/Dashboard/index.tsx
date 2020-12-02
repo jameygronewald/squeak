@@ -5,6 +5,8 @@ import { fetchPlaces } from '../../redux/places/actions';
 import { SearchParams } from '../../interfaces';
 import TopRatedPlaces from '../../components/TopRatedPlaces';
 
+import './style.css';
+
 const Dashboard: React.FC = (): JSX.Element => {
   const [searchParams, setSearchParams] = useState<SearchParams>({
     search: '',
@@ -14,7 +16,7 @@ const Dashboard: React.FC = (): JSX.Element => {
   const { sessionToken } = useContext(UserContext);
 
   return (
-    <div className='welcomeContainer'>
+    <div className='dashboardContainer'>
       <div className='getStartedContainer'>
         <div className='getStarted'>
           <div className='getStartedForm'>

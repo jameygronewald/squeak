@@ -1,14 +1,14 @@
 import React from 'react';
 import spinner from './spinner.gif';
 
-interface Props {}
+import './style.css';
 
-const Spinner = (props: Props) => {
+const Spinner: React.FC = (): JSX.Element => {
   return (
     <>
       <img
         src={spinner}
-        style={{ width: '200px', margin: 'auto', display: 'block' }}
+        className='spinner'
         alt='Loading...'
       />
     </>

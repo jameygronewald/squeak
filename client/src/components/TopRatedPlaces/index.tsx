@@ -17,14 +17,14 @@ const TopRatedPlaces: React.FC = (): JSX.Element => {
 
   // TODO MAKE A TABLE FOR SAVED PLACE DATA
   return (
-    <div className='savedPlaceContainer'>
+    <div className='topRatedPlacesContainer'>
       <h2>Top Rated Saved Places</h2>
       <ul>
         {savedPlaces.map((place: any) => (
-          <div key={place.place_id} className='savedPlace'>
+          <div key={place.place_id} className='topRatedPlace'>
             <h3>{place.name}</h3>
             <button
-              className='savedPlaceButton'
+              className='topRatedPlaceButton'
               onClick={deletePlace(place.place_id)}
             >
               <DeleteIcon />

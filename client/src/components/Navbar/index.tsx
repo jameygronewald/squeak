@@ -4,6 +4,8 @@ import UserContext from "../../context/UserContext";
 import { clearPlaceState } from '../../redux/places/actions';
 import { RouteComponentProps, withRouter } from "react-router-dom";
 
+import './style.css';
+
 interface LogoutProps extends RouteComponentProps {}
 
 const Navbar: React.FC<LogoutProps> = ({ history }): JSX.Element => {

@@ -27,6 +27,10 @@
   align-self: flex-start;
 }
 
+.getStartedForm label {
+  font-size: 1.3rem;
+}
+
 .getStartedForm h3,
 .getStartedForm label,
 .getStartedForm input {
@@ -46,11 +50,11 @@
   }
 
   .getStartedContainer {
-      margin-top: 50px;
-      align-self: center;
+    margin-top: 50px;
+    align-self: center;
   }
 
   .topRatedPlacesContainer {
-      margin-top: 50px;
+    margin-top: 50px;
   }
 }

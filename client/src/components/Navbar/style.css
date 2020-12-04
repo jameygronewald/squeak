@@ -1,0 +1,22 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbarNoAuth {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.navSpacer {
+  width: 10vw;
+}
+
+.logoutButton {
+  font-size: 1.8rem;
+  border-radius: 0 0 0 12%;
+  background: #fddb3a;
+  color: #1e5f74;
+  margin: 0;
+}

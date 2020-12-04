@@ -52,7 +52,7 @@ const App = () => {
           <Switch>
             <PublicRoute exact path="/" component={LandingPage}/>
             <PublicRoute exact path="/login" component={Login} />
-            <PublicRoute exact path="/signup" component={Register} />
+            <PublicRoute exact path="/register" component={Register} />
             <ProtectedRoute path="/dashboard" component={Dashboard} />
             <Route path="/search" component={Search} />
             <Route component={NoMatch} />

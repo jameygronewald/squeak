@@ -3,6 +3,8 @@ import { RegisterInfoState } from '../../interfaces';
 import UserContext from '../../context/UserContext';
 import axios from 'axios';
 
+import './style.css';
+
 const Register: React.FC = (): JSX.Element => {
   const [registerInfo, setRegisterInfo] = useState<RegisterInfoState>({
     email: '',
@@ -32,7 +34,7 @@ const Register: React.FC = (): JSX.Element => {
   };
 
   return (
-    <div className='signupContainer'>
+    <div className='registerContainer'>
       <form onSubmit={handleSubmit}>
         <label htmlFor='email'>Email: </label>
         <input
@@ -58,7 +60,10 @@ const Register: React.FC = (): JSX.Element => {
           name='passwordConfirm'
           value={registerInfo.passwordConfirm}
           onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-            setRegisterInfo({ ...registerInfo, passwordConfirm: e.target.value })
+            setRegisterInfo({
+              ...registerInfo,
+              passwordConfirm: e.target.value,
+            })
           }
         />
         <button type='submit'>Submit</button>

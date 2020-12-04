@@ -1,13 +1,13 @@
 import React from 'react'
 
-interface HomeTextProps {
+interface LandingPageTextProps {
     text1: string
     text2: string
     text3: string
     className: string
 }
 
-const HomeText: React.FC<HomeTextProps> = (props: HomeTextProps): JSX.Element => {
+const LandingPageText: React.FC<LandingPageTextProps> = (props: LandingPageTextProps): JSX.Element => {
     return (
         <div className={props.className}>
             <h3>{props.text1}</h3>
@@ -17,4 +17,4 @@ const HomeText: React.FC<HomeTextProps> = (props: HomeTextProps): JSX.Element =>
     )
 }
 
-export default HomeText;
+export default LandingPageText;

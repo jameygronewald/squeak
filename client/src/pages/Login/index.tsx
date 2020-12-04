@@ -3,6 +3,8 @@ import UserContext from '../../context/UserContext';
 import { UserCredentialsState } from '../../interfaces';
 import axios from 'axios';
 
+import './style.css';
+
 const Login: React.FC = (): JSX.Element => {
   const [credentials, setCredentials] = useState<UserCredentialsState>({
     email: '',

@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import HomeText from '../../components/HomeText';
+import LandingPageText from '../../components/LandingPageText';
 
 import './style.css';
 
 const LandingPage: React.FC = (): JSX.Element => {
   return (
-    <div className='homeContainer'>
+    <div className='landingPageContainer'>
       <Link className='registerButton' to='/register'>
         <button>Sign Up</button>
       </Link>
@@ -14,8 +14,8 @@ const LandingPage: React.FC = (): JSX.Element => {
       <Link className='loginButton' to='/login'>
         <button>Log In</button>
       </Link>
-      <HomeText
-        className='homeText'
+      <LandingPageText
+        className='landingPageText'
         text1="Can't remember your favorite dumpling place?"
         text2='Need the perfect date-night spot?'
         text3='Squeak is here for you!'

@@ -34,7 +34,7 @@ const ORM = {
     }
   },
 
-  insertOne: async (table: string, fieldsToAdd: {}) => {
+  insertOne: async (table: string, fieldsToAdd: any) => {
     let columnPlaceholderString: string = '';
     let valuePlaceholderString: string = '';
     
@@ -60,7 +60,7 @@ const ORM = {
     }
   },
 
-  updateOneById: async (table: string, fieldsToUpdate: {}, id: string) => {
+  updateOneById: async (table: string, fieldsToUpdate: any, id: string) => {
     const idType: string = `${table}_id`;
 
     let placeholderString: string = '';

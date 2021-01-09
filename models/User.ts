@@ -10,7 +10,7 @@ const User = {
     }
   },
 
-  createUser: async (columnValuePairs) => {
+  createUser: async (columnValuePairs: {}) => {
     try {
       const result = await ORM.insertOne("users", columnValuePairs);
       return result;

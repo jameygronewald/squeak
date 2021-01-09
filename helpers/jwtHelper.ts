@@ -1,16 +1,21 @@
-import * as jwt from 'jsonwebtoken';
-import * as dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 dotenv.config();
 
 const jwtHelper = {
-  generateSessionToken: (id: string) =>
-    jwt.sign({ data: id }, process.env.JWT_SECRET, {
+  generateSessionToken: (id: string) => {
+    const secret = process.env.JWT_SECRET ? process.env.JWT_SECRET : '';
+    return jwt.sign({ data: id }, secret, {
       expiresIn: '1y',
-    }),
+    });
+  },
 
-  verifySessionToken: (sessionToken: string) => jwt.verify(sessionToken, process.env.JWT_SECRET),
+  verifySessionToken: (sessionToken: string) => {
+    const secret = process.env.JWT_SECRET ? process.env.JWT_SECRET : '';
+    return jwt.verify(sessionToken, secret);
+  },
 
-  parseUserIdFromJwt: function (jwt: string): number {
+  parseUserIdFromJwt: function (jwt: string): number | undefined {
     const payload = this.verifySessionToken(jwt);
     if (!payload) return;
     let parsedUserIdObject: { data: number };

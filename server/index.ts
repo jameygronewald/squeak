@@ -1,6 +1,6 @@
-import * as express from "express";
-import * as path from "path";
-import * as cors from "cors";
+import express from "express";
+import path from "path";
+import cors from "cors";
 
 const app = express();
 

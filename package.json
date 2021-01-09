@@ -4,13 +4,16 @@
   "description": "Keep of track of all your favorite places",
   "main": "./server/index.ts",
   "scripts": {
+    "watch": "nodemon ./server/index.ts",
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node ./server/index.ts",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "client": "cd client && npm run start",
     "seed": "node scripts/seedDB.js",
     "install": "cd client && npm install",
-    "build": "cd client && npm run build",
+    "build": "npm run build:backend && npm run build:frontend",
+    "build:backend": "tsc -p ./",
+    "build:frontend": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
   "repository": {

@@ -18,12 +18,15 @@ const jwtHelper = {
   parseUserIdFromJwt: function (jwt: string): number | undefined {
     const payload = this.verifySessionToken(jwt);
     if (!payload) return;
-    let parsedUserIdObject: { data: number };
-    if (typeof payload == 'object') {
-      parsedUserIdObject = payload as { data: number };
-    }
-    const parsedUserId = parsedUserIdObject.data;
-    return parsedUserId;
+
+    let parsedUserIdObject: { data: number } | null = null;
+    parsedUserIdObject =
+      typeof payload == 'object' ? (payload as { data: number }) : null;
+
+    let parsedUserId: number | null = null;
+    parsedUserId = parsedUserIdObject ? parsedUserIdObject.data : null;
+
+    return parsedUserId ? parsedUserId : undefined;
   },
 };
 

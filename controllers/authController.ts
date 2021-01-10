@@ -45,9 +45,13 @@ router.post('/login', async (req, res) => {
     if (credentials.password !== userData.password)
       throw new Error('Incorrect password.');
 
-    const sessionToken: string = jwtHelper.generateSessionToken(userData.user_id);
+    const sessionToken: string | null = jwtHelper.generateSessionToken(
+      userData.user_id
+    );
 
-    if (!sessionToken || sessionToken === undefined ) throw new Error();
+    if (!sessionToken || sessionToken === undefined || sessionToken === null) {
+      throw new Error();
+    }
     res.status(201).json({
       error: false,
       body: { sessionToken, userData },

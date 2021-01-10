@@ -5,6 +5,7 @@ dotenv.config();
 const jwtHelper = {
   generateSessionToken: (id: string) => {
     const secret = process.env.JWT_SECRET ? process.env.JWT_SECRET : '';
+    if (secret.length < 1) return null;
     return jwt.sign({ data: id }, secret, {
       expiresIn: '1y',
     });
@@ -12,6 +13,7 @@ const jwtHelper = {
 
   verifySessionToken: (sessionToken: string) => {
     const secret = process.env.JWT_SECRET ? process.env.JWT_SECRET : '';
+    if (secret.length < 1) return null;
     return jwt.verify(sessionToken, secret);
   },
 

@@ -10,7 +10,7 @@ const Place = {
     }
   },
 
-  savePlace: async (columnValuePairs) => {
+  savePlace: async (columnValuePairs: {}) => {
     try {
       const result = await ORM.insertOne('place', columnValuePairs);
       return result;
@@ -19,7 +19,7 @@ const Place = {
     }
   },
 
-  updatePlace: async (columnValuePairs, id: string) => {
+  updatePlace: async (columnValuePairs: {}, id: string) => {
     try {
       const result = await ORM.updateOneById('place', columnValuePairs, id);
       return result;

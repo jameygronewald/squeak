@@ -1,8 +1,8 @@
-import * as express from 'express';
+import express from 'express';
 import axios from 'axios';
 import Place from '../models/Place';
 import jwtHelper from '../helpers/jwtHelper';
-import * as dotenv from 'dotenv';
+import dotenv from 'dotenv';
 dotenv.config();
 import { YelpSearchConfig } from '../helpers/interfaces';
 
@@ -42,8 +42,11 @@ router.post('/places/fetch', async (req, res) => {
 router.get('/places/:userId', async (req, res) => {
   try {
     const unparsedUserId: string = req.params.userId;
-    const parsedUserId: number = jwtHelper.parseUserIdFromJwt(unparsedUserId);
-    const savedPlaces = await Place.getSavedPlaces(parsedUserId);
+    const parsedUserId: number | undefined = jwtHelper.parseUserIdFromJwt(
+      unparsedUserId
+    );
+    let savedPlaces;
+    if (parsedUserId) savedPlaces = await Place.getSavedPlaces(parsedUserId);
     if (!savedPlaces) throw new Error();
     res.status(200).json({
       error: false,
@@ -65,7 +68,10 @@ router.post('/places', async (req, res) => {
     const newPlaceData = await req.body;
 
     const unparsedUserId: string = newPlaceData.user_id;
-    const parsedUserId: number = jwtHelper.parseUserIdFromJwt(unparsedUserId);
+    const parsedUserId: number | undefined = jwtHelper.parseUserIdFromJwt(
+      unparsedUserId
+    );
+    if (!parsedUserId) throw new Error('Unable to add new place.');
     newPlaceData.user_id = parsedUserId;
 
     const newPlace = await Place.savePlace(newPlaceData);

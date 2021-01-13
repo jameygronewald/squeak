@@ -1,11 +1,11 @@
-import pool from './db';
+import postgres from './db';
 
 const ORM = {
   findAll: async (table: string) => {
     const queryString: string = 'SELECT * FROM $1;';
 
     try {
-      const result = await pool.query(queryString, [table]);
+      const result = await postgres.query(queryString, [table]);
       return result;
     } catch (err) {
       console.error(err.message);
@@ -16,7 +16,7 @@ const ORM = {
     const queryString: string = `SELECT * FROM ${table} WHERE user_id = $1;`;
 
     try {
-      const result = await pool.query(queryString, [id]);
+      const result = await postgres.query(queryString, [id]);
       return result.rows;
     } catch (err) {
       console.error('ORM: ' + err.message);
@@ -27,7 +27,7 @@ const ORM = {
     const queryString: string = `SELECT * FROM ${table} WHERE ${column} = $1;`;
 
     try {
-      const result = await pool.query(queryString, [value]);
+      const result = await postgres.query(queryString, [value]);
       return result.rows[0];
     } catch (err) {
       console.error('ORM: ' + err.message);
@@ -53,7 +53,7 @@ const ORM = {
     const queryString: string = `INSERT INTO ${table}(${columnPlaceholderString}) VALUES(${valuePlaceholderString}) RETURNING *;`;
 
     try {
-      const result = await pool.query(queryString);
+      const result = await postgres.query(queryString);
       return result.rows[0];
     } catch (err) {
       console.error('ORM: ' + err.message);
@@ -77,7 +77,7 @@ const ORM = {
     const queryString: string = `UPDATE ${table} SET ${placeholderString} WHERE ${idType} = $1`;
 
     try {
-      await pool.query(queryString, [id]);
+      await postgres.query(queryString, [id]);
       return { updatedFields: fieldsToUpdate };
     } catch (err) {
       console.error('ORM: ', err.message);
@@ -88,7 +88,7 @@ const ORM = {
     const idType: string = `${table}_id`;
     const queryString: string = `DELETE FROM ${table} WHERE ${idType} = ${id}`;
     try {
-      await pool.query(queryString);
+      await postgres.query(queryString);
     } catch (err) {
       console.error('ORM: ', err.message);
     }

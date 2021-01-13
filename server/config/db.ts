@@ -1,7 +1,6 @@
-const { Pool } = require('pg');
-// import { Pool } from 'pg';
+import pg from 'pg';
 
-const pool = new Pool({
+const postgres = new pg.Pool({
   user: 'postgres',
   password: 'ferial08',
   host: 'localhost',
@@ -9,4 +8,4 @@ const pool = new Pool({
   database: 'squeak',
 });
 
-export default pool;
+export default postgres;

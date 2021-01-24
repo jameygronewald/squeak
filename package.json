@@ -11,10 +11,11 @@
     "client": "cd client && npm run start",
     "seed": "node scripts/seedDB.js",
     "install": "cd client && npm install",
-    "build:backend": "tsc -p ./",
+    "tsc": "tsc -p ./",
+    "build:backend": "npm run tsc",
     "build:frontend": "cd client && npm run build",
-    "build:prod": "npm run build:backend && npm run build:frontend",
-    "heroku-postbuild": "npm run build:prod"
+    "build": "npm run build:backend && npm run build:frontend",
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
   },
   "homepage": "https://github.com/jameygronewald/squeak#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",

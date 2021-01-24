@@ -6,7 +6,8 @@ const router = express.Router();
 
 router.post('/register', async (req, res) => {
   try {
-    const newUserInfo = await req.body;
+    const newUserInfo = req.body;
+    delete newUserInfo.passwordConfirm;
     if (!newUserInfo) throw new Error();
 
     const existingUser = await User.findUserByEmail(newUserInfo.email);

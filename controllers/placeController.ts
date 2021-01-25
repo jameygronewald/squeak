@@ -1,45 +1,33 @@
-import express from 'express';
-import axios from 'axios';
 import Place from '../models/Place';
+import yelpService from '../services/yelpService';
 import jwtHelper from '../helpers/jwtHelper';
+import { IOutput } from '../helpers/interfaces';
 import dotenv from 'dotenv';
 dotenv.config();
-import { YelpSearchConfig } from '../helpers/interfaces';
 
-const router = express.Router();
+export const fetchPlaces = async (req, res) => {
+  const { search, city } = req.body;
 
-router.post('/places/fetch', async (req, res) => {
+  let output: IOutput = { status: 500, data: {} };
+
   try {
-    const { search, city } = req.body;
+    const businesses = await yelpService.searchForPlaces(search, city);
 
-    const URL: string = `https://api.yelp.com/v3/businesses/search?term=${search}&location=${city}`;
-    const searchConfig: YelpSearchConfig = {
-      headers: {
-        Authorization: 'Bearer ' + process.env.REACT_APP_YELP_API_KEY,
-        'Content-Type': 'application/json',
+    output = {
+      status: 200,
+      data: {
+        body: businesses,
+        message: 'Successfully retrieved search results.',
       },
     };
-
-    const response = await axios.get(URL, searchConfig);
-
-    const { businesses } = response.data;
-
-    res.status(200).json({
-      error: false,
-      body: businesses,
-      message: 'Successfully retrieved search results.',
-    });
   } catch (err) {
     console.error(err.message);
-    res.status(500).json({
-      error: true,
-      body: null,
-      message: 'Unable to fetch places.',
-    });
+    output = { status: 400, data: { message: 'Unable to fetch places.' } };
   }
-});
+  res.status(output.status).send(output.data);
+};
 
-router.get('/places/:userId', async (req, res) => {
+export const getPlace = async (req, res) => {
   try {
     const unparsedUserId: string = req.params.userId;
     const parsedUserId: number | undefined = jwtHelper.parseUserIdFromJwt(
@@ -61,9 +49,9 @@ router.get('/places/:userId', async (req, res) => {
       message: "Unable to retrieve user's places.",
     });
   }
-});
+};
 
-router.post('/places', async (req, res) => {
+export const postPlace = async (req, res) => {
   try {
     const newPlaceData = await req.body;
 
@@ -89,9 +77,9 @@ router.post('/places', async (req, res) => {
       message: 'Unable to save new place.',
     });
   }
-});
+};
 
-router.put('/places/:id', async (req, res) => {
+export const putPlace = async (req, res) => {
   try {
     const placeId: string = req.params.id;
     const dataToAdd: {} = await req.body;
@@ -109,9 +97,9 @@ router.put('/places/:id', async (req, res) => {
       message: 'Server error. Unable to save new place.',
     });
   }
-});
+};
 
-router.delete('/places/:id', async (req, res) => {
+export const deletePlace = async (req, res) => {
   try {
     const placeId = req.params.id;
     await Place.deletePlace(placeId);
@@ -128,6 +116,4 @@ router.delete('/places/:id', async (req, res) => {
       message: 'Server error. Unable to delete place.',
     });
   }
-});
-
-module.exports = router;
+};

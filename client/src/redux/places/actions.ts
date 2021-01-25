@@ -19,9 +19,9 @@ export const fetchPlaces = (
 ) => async () => {
   try {
     const res = await axios.post('/places/fetch', searchParams);
-    const searchResults = res.data.body;
+    const { businesses } = res.data.body;
 
-    const searchDisplayData: SearchData[] = searchResults.map(
+    const searchDisplayData: SearchData[] = businesses.map(
       (business: SearchResults) => {
         const { id, name, phone, rating } = business;
         const { address1, city, state, zip_code } = business.location;

@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.use(require('../controllers/authController'));
-app.use(require('../controllers/placeController'));
+app.use(require('../routes/placeRoutes'));
 
 const PORT = process.env.PORT || 3001;
 
